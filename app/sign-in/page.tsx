@@ -17,7 +17,7 @@ export default function SignInPage() {
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        emailRedirectTo: "https://www.fansfirstreactions.com/auth/callback",
       },
     });
 
