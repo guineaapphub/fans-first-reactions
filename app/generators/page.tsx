@@ -1023,22 +1023,40 @@ ${creatorPromotionText}`;
   <input
     type="number"
     min="0"
-    value={homeScore}
-    onChange={(e) => setHomeScore(Math.max(0, Number(e.target.value) || 0))}
+    inputMode="numeric"
+    value={homeScore === 0 ? "" : homeScore}
+    placeholder="0"
+    onChange={(e) => {
+      if (e.target.value === "") {
+        setHomeScore(0);
+        return;
+      }
+
+      setHomeScore(Math.max(0, parseInt(e.target.value, 10) || 0));
+    }}
     className="inputLight"
   />
 </Field>
 
             {videoType !== "Signing / Sacking" && (
               <Field label="Away Score">
-                 <input
-      type="number"
-      min="0"
-      value={awayScore}
-      onChange={(e) => setAwayScore(Math.max(0, Number(e.target.value) || 0))}
-      className="inputLight"
-          />
-  </Field>
+  <input
+    type="number"
+    min="0"
+    inputMode="numeric"
+    value={awayScore === 0 ? "" : awayScore}
+    placeholder="0"
+    onChange={(e) => {
+      if (e.target.value === "") {
+        setAwayScore(0);
+        return;
+      }
+
+      setAwayScore(Math.max(0, parseInt(e.target.value, 10) || 0));
+    }}
+    className="inputLight"
+  />
+</Field>
 )}
           </div>
 
@@ -1162,7 +1180,22 @@ ${creatorPromotionText}`;
               options={creatorTeamSelectOptions}
               placeholder="Select team from selected league..."
             />
-            <input type="number" value={creatorCount} onChange={(e) => setCreatorCount(Number(e.target.value))} className="inputLight" />
+            <input
+  type="number"
+  min="1"
+  inputMode="numeric"
+  value={creatorCount === 0 ? "" : creatorCount}
+  placeholder="1"
+  onChange={(e) => {
+    if (e.target.value === "") {
+      setCreatorCount(0);
+      return;
+    }
+
+    setCreatorCount(Math.max(1, parseInt(e.target.value, 10) || 1));
+  }}
+  className="inputLight"
+/>
             <button onClick={addFeaturedChannels} disabled={!creatorTeam} className="btnPrimary disabled:opacity-40">
               Add
             </button>
@@ -1575,7 +1608,9 @@ function Output({
         </button>
       </div>
 
-      <pre className={`whitespace-pre-wrap rounded-xl border border-[#67e1f9]/20 bg-black/40 p-5 text-slate-300 ${large ? "min-h-[260px]" : ""}`}>
+      <pre
+  className={`max-w-full overflow-x-auto whitespace-pre-wrap break-words rounded-xl border border-[#67e1f9]/20 bg-black/40 p-5 text-slate-300 ${large ? "min-h-[260px]" : ""}`}
+>
         {text}
       </pre>
     </div>

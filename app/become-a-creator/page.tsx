@@ -229,6 +229,13 @@ export default function BecomeCreatorPage() {
               >
                 View Creator Tools
               </a>
+
+              <a
+                href="/submit"
+                className="rounded-full border border-[#67e1f9]/50 px-8 py-4 font-bold text-[#67e1f9] hover:bg-[#67e1f9] hover:text-black"
+              >
+                Submit a Creator
+              </a>
             </div>
           </div>
         </div>

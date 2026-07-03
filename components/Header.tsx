@@ -14,9 +14,11 @@ export default function Header() {
       setSignedIn(!!data.user);
     });
 
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSignedIn(!!session?.user);
-    });
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSignedIn(!!session?.user);
+      }
+    );
 
     return () => {
       listener.subscription.unsubscribe();
@@ -45,7 +47,11 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 md:px-8 md:py-5">
-        <Link href="/" onClick={closeMenu} className="flex items-center gap-3 md:gap-4">
+        <Link
+          href="/"
+          onClick={closeMenu}
+          className="flex shrink-0 items-center gap-3 md:gap-4"
+        >
           <Image
             src="/f1r-logo.png"
             alt="Fans First Reactions"
@@ -55,17 +61,23 @@ export default function Header() {
             priority
           />
 
-          <div className="leading-tight">
+          <div className="shrink-0 leading-tight">
             <div className="text-2xl font-black text-white md:text-2xl">
               Fans <span className="text-[#67e1f9]">First</span>
             </div>
-            <div className="text-2xl font-black text-white md:text-2xl">Reactions</div>
+            <div className="text-2xl font-black text-white md:text-2xl">
+              Reactions
+            </div>
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-10 text-base font-black text-white lg:flex">
+        <nav className="hidden items-center gap-7 text-base font-black text-white xl:gap-10 lg:flex">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-[#67e1f9]">
+            <Link
+              key={link.href}
+              href={link.href}
+              className="whitespace-nowrap hover:text-[#67e1f9]"
+            >
               {link.label}
             </Link>
           ))}
@@ -74,7 +86,7 @@ export default function Header() {
             href="https://www.youtube.com/@FansFirstReactions"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-[#67e1f9]"
+            className="whitespace-nowrap hover:text-[#67e1f9]"
           >
             YouTube ↗
           </a>
@@ -83,17 +95,17 @@ export default function Header() {
             href="https://x.com/Fans1R"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-[#67e1f9]"
+            className="whitespace-nowrap hover:text-[#67e1f9]"
           >
             X ↗
           </a>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-3">
           {signedIn ? (
             <button
               onClick={signOut}
-              className="hidden rounded-2xl bg-[#67e1f9] px-7 py-4 text-lg font-black text-black hover:bg-white lg:block"
+              className="hidden whitespace-nowrap rounded-2xl bg-[#67e1f9] px-7 py-4 text-lg font-black text-black hover:bg-white lg:block"
             >
               Sign Out
             </button>
@@ -101,7 +113,7 @@ export default function Header() {
             <Link
               href="/sign-in"
               onClick={closeMenu}
-              className="hidden rounded-2xl bg-[#67e1f9] px-7 py-4 text-lg font-black text-black hover:bg-white lg:block"
+              className="hidden whitespace-nowrap rounded-2xl bg-[#67e1f9] px-7 py-4 text-lg font-black text-black hover:bg-white lg:block"
             >
               Sign In
             </Link>

@@ -14,8 +14,51 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fans First Reactions",
-  description: "Creator database for football fan channels.",
+  metadataBase: new URL("https://fansfirstreactions.com"),
+  title: {
+    default: "Fans First Reactions",
+    template: "%s | Fans First Reactions",
+  },
+  description:
+    "Discover football fan reaction creators, supporter channels, club pages, match fixtures, and YouTube description tools for football content.",
+  keywords: [
+    "football fan reactions",
+    "football reaction channels",
+    "football creators",
+    "football fan channels",
+    "football fixtures",
+    "YouTube football reactions",
+    "Fans First Reactions",
+  ],
+  applicationName: "Fans First Reactions",
+  authors: [{ name: "Fans First Reactions" }],
+  creator: "Fans First Reactions",
+  publisher: "Fans First Reactions",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Fans First Reactions",
+    description:
+      "Discover football fan reaction creators, supporter channels, club pages, match fixtures, and YouTube description tools.",
+    url: "https://fansfirstreactions.com",
+    siteName: "Fans First Reactions",
+    type: "website",
+    locale: "en_GB",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fans First Reactions",
+    description:
+      "Discover football fan reaction creators, supporter channels, club pages, match fixtures, and YouTube description tools.",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 function Footer() {
