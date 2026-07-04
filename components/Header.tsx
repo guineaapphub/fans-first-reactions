@@ -47,11 +47,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 md:px-8 md:py-5">
-        <Link
-          href="/"
-          onClick={closeMenu}
-          className="flex shrink-0 items-center gap-3 md:gap-4"
-        >
+        <Link href="/" onClick={closeMenu} className="flex shrink-0 items-center gap-3 md:gap-4">
           <Image
             src="/f1r-logo.png"
             alt="Fans First Reactions"
@@ -62,41 +58,25 @@ export default function Header() {
           />
 
           <div className="shrink-0 leading-tight">
-            <div className="text-2xl font-black text-white md:text-2xl">
+            <div className="text-2xl font-black text-white">
               Fans <span className="text-[#67e1f9]">First</span>
             </div>
-            <div className="text-2xl font-black text-white md:text-2xl">
-              Reactions
-            </div>
+            <div className="text-2xl font-black text-white">Reactions</div>
           </div>
         </Link>
 
         <nav className="hidden items-center gap-7 text-base font-black text-white xl:gap-10 lg:flex">
           {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="whitespace-nowrap hover:text-[#67e1f9]"
-            >
+            <Link key={link.href} href={link.href} className="whitespace-nowrap hover:text-[#67e1f9]">
               {link.label}
             </Link>
           ))}
 
-          <a
-            href="https://www.youtube.com/@FansFirstReactions"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="whitespace-nowrap hover:text-[#67e1f9]"
-          >
+          <a href="https://www.youtube.com/@FansFirstReactions" target="_blank" rel="noopener noreferrer" className="whitespace-nowrap hover:text-[#67e1f9]">
             YouTube ↗
           </a>
 
-          <a
-            href="https://x.com/Fans1R"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="whitespace-nowrap hover:text-[#67e1f9]"
-          >
+          <a href="https://x.com/Fans1R" target="_blank" rel="noopener noreferrer" className="whitespace-nowrap hover:text-[#67e1f9]">
             X ↗
           </a>
         </nav>
@@ -144,39 +124,20 @@ export default function Header() {
               </Link>
             ))}
 
-            <a
-              href="https://www.youtube.com/@FansFirstReactions"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={closeMenu}
-              className="rounded-2xl border border-white/10 bg-[#0c1020] px-5 py-4 hover:border-[#67e1f9] hover:text-[#67e1f9]"
-            >
+            <a href="https://www.youtube.com/@FansFirstReactions" target="_blank" rel="noopener noreferrer" onClick={closeMenu} className="rounded-2xl border border-white/10 bg-[#0c1020] px-5 py-4 hover:border-[#67e1f9] hover:text-[#67e1f9]">
               YouTube ↗
             </a>
 
-            <a
-              href="https://x.com/Fans1R"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={closeMenu}
-              className="rounded-2xl border border-white/10 bg-[#0c1020] px-5 py-4 hover:border-[#67e1f9] hover:text-[#67e1f9]"
-            >
+            <a href="https://x.com/Fans1R" target="_blank" rel="noopener noreferrer" onClick={closeMenu} className="rounded-2xl border border-white/10 bg-[#0c1020] px-5 py-4 hover:border-[#67e1f9] hover:text-[#67e1f9]">
               X ↗
             </a>
 
             {signedIn ? (
-              <button
-                onClick={signOut}
-                className="mt-2 rounded-2xl bg-[#67e1f9] px-6 py-4 text-lg font-black text-black hover:bg-white"
-              >
+              <button onClick={signOut} className="mt-2 rounded-2xl bg-[#67e1f9] px-6 py-4 text-lg font-black text-black hover:bg-white">
                 Sign Out
               </button>
             ) : (
-              <Link
-                href="/sign-in"
-                onClick={closeMenu}
-                className="mt-2 rounded-2xl bg-[#67e1f9] px-6 py-4 text-center text-lg font-black text-black hover:bg-white"
-              >
+              <Link href="/sign-in" onClick={closeMenu} className="mt-2 rounded-2xl bg-[#67e1f9] px-6 py-4 text-center text-lg font-black text-black hover:bg-white">
                 Sign In
               </Link>
             )}

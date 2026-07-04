@@ -265,6 +265,15 @@ export default function CreatorsPage() {
               >
                 ★ Favorites
               </button>
+
+              {isSignedIn && (
+                <Link
+                  href="/account"
+                  className="rounded-full border border-white/20 px-6 py-3 font-black text-white hover:border-[#67e1f9] hover:text-[#67e1f9]"
+                >
+                  👤 Account
+                </Link>
+              )}
             </div>
           </div>
 
