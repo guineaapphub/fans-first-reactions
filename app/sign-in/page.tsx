@@ -9,7 +9,6 @@ export default function SignInPage() {
   const [magicEmail, setMagicEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -19,6 +18,24 @@ export default function SignInPage() {
       ? `${window.location.origin}/auth/callback`
       : "https://www.fansfirstreactions.com/auth/callback";
 
+  async function sendUserToRightPage(userId: string) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role, email")
+      .eq("id", userId)
+      .single();
+
+    if (
+      profile?.role === "admin" ||
+      profile?.email?.toLowerCase() === "guineagamehub@gmail.com"
+    ) {
+      window.location.href = "/admin";
+      return;
+    }
+
+    window.location.href = "/favourites";
+  }
+
   async function handlePasswordSignIn(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -26,19 +43,18 @@ export default function SignInPage() {
     setMessage("");
     setErrorMessage("");
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
-    setLoading(false);
-
-    if (error) {
-      setErrorMessage(error.message);
+    if (error || !data.user) {
+      setLoading(false);
+      setErrorMessage(error?.message || "Sign in failed.");
       return;
     }
 
-    window.location.href = "/favourites";
+    await sendUserToRightPage(data.user.id);
   }
 
   async function handleMagicLink(e: React.FormEvent<HTMLFormElement>) {

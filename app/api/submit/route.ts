@@ -6,8 +6,12 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
+
+function normalizeYoutubeUrl(value: string) {
+  return value.trim().replace(/\/+$/, "");
+}
 
 export async function POST(req: Request) {
   try {
@@ -21,13 +25,43 @@ export async function POST(req: Request) {
       );
     }
 
+    const cleanYoutubeUrl = normalizeYoutubeUrl(youtubeUrl);
+
+    const { data: existingCreator } = await supabaseAdmin
+      .from("creators")
+      .select("id")
+      .eq("youtube_url", cleanYoutubeUrl)
+      .maybeSingle();
+
+    if (existingCreator) {
+      return NextResponse.json(
+        { error: "This YouTube channel is already listed." },
+        { status: 409 }
+      );
+    }
+
+    const { data: existingPendingSubmission } = await supabaseAdmin
+      .from("creator_submissions")
+      .select("id")
+      .eq("youtube_url", cleanYoutubeUrl)
+      .eq("status", "pending")
+      .maybeSingle();
+
+    if (existingPendingSubmission) {
+      return NextResponse.json(
+        { error: "This YouTube channel has already been submitted and is waiting for review." },
+        { status: 409 }
+      );
+    }
+
     const { error: dbError } = await supabaseAdmin
       .from("creator_submissions")
       .insert([
         {
-          youtube_url: youtubeUrl,
+          youtube_url: cleanYoutubeUrl,
           league,
           team,
+          status: "pending",
         },
       ]);
 
@@ -45,7 +79,7 @@ export async function POST(req: Request) {
       subject: "New Creator Submission",
       html: `
         <h2>New Creator Submission</h2>
-        <p><strong>YouTube:</strong><br>${youtubeUrl}</p>
+        <p><strong>YouTube:</strong><br>${cleanYoutubeUrl}</p>
         <p><strong>League:</strong> ${league}</p>
         <p><strong>Team:</strong> ${team}</p>
       `,

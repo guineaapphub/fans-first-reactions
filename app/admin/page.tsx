@@ -11,6 +11,8 @@ type CreatorSubmission = {
   status: string;
 };
 
+const ADMIN_EMAIL = "guineagamehub@gmail.com";
+
 export default function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [allowed, setAllowed] = useState(false);
@@ -44,14 +46,21 @@ export default function AdminPage() {
         return;
       }
 
+      const userEmail = user.email?.toLowerCase() || "";
+
       const { data: profile } = await supabase
         .from("profiles")
-        .select("role")
+        .select("role, email")
         .eq("id", user.id)
         .single();
 
-      if (profile?.role !== "admin") {
-        window.location.href = "/";
+      const isAdmin =
+        userEmail === ADMIN_EMAIL ||
+        profile?.email?.toLowerCase() === ADMIN_EMAIL ||
+        profile?.role === "admin";
+
+      if (!isAdmin) {
+        window.location.href = "/favourites";
         return;
       }
 
@@ -87,8 +96,10 @@ export default function AdminPage() {
         body: JSON.stringify({ id }),
       });
 
+      const result = await res.json();
+
       if (!res.ok) {
-        throw new Error("Approve failed");
+        throw new Error(result?.error || "Approve failed");
       }
 
       setSubmissions((current) =>
@@ -96,7 +107,8 @@ export default function AdminPage() {
       );
 
       alert("✅ Creator approved and moved to live creators.");
-    } catch {
+    } catch (error) {
+      console.error(error);
       alert("❌ Failed to approve creator.");
     }
 
@@ -126,8 +138,10 @@ export default function AdminPage() {
         body: JSON.stringify({ id }),
       });
 
+      const result = await res.json();
+
       if (!res.ok) {
-        throw new Error("Reject failed");
+        throw new Error(result?.error || "Reject failed");
       }
 
       setSubmissions((current) =>
@@ -135,7 +149,8 @@ export default function AdminPage() {
       );
 
       alert("✅ Submission rejected.");
-    } catch {
+    } catch (error) {
+      console.error(error);
       alert("❌ Failed to reject submission.");
     }
 
@@ -162,21 +177,13 @@ export default function AdminPage() {
         <h1 className="mt-4 text-4xl font-black md:text-5xl">Admin Panel</h1>
 
         <p className="mt-3 max-w-2xl text-white/70">
-          Manage creator submissions and site data.
+          Review creator submissions. Approving here adds the creator to the live website.
         </p>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          <AdminCard
-            title="Pending Approvals"
-            text={`${submissions.length} submissions waiting`}
-          />
-          <AdminCard
-            title="Creators"
-            text="Edit, delete, or feature creators."
-          />
-          <AdminCard title="Users" text="View registered users." />
-          <AdminCard title="Clubs" text="Manage football clubs." />
-          <AdminCard title="Leagues" text="Manage leagues." />
+          <AdminCard title="Pending Approvals" text={`${submissions.length} waiting`} />
+          <AdminCard title="Creators" text="Live creators are managed in Supabase." />
+          <AdminCard title="Users" text="User roles are managed in profiles." />
         </div>
 
         <section className="mt-12 rounded-[28px] border border-[#67e1f9]/30 bg-white/5 p-6">
@@ -204,10 +211,7 @@ export default function AdminPage() {
                     const isBusy = actionLoadingId === submission.id;
 
                     return (
-                      <tr
-                        key={submission.id}
-                        className="border-b border-white/10 text-white/80"
-                      >
+                      <tr key={submission.id} className="border-b border-white/10 text-white/80">
                         <td className="py-4 pr-4">
                           <a
                             href={submission.youtube_url}
