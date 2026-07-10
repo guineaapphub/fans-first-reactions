@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
@@ -106,6 +107,17 @@ const jsonLd = {
         "@id": `${siteUrl}/#organization`,
       },
     },
+    {
+      "@type": "WebApplication",
+      "@id": `${siteUrl}/#webapplication`,
+      name: "Fans First Reactions",
+      url: siteUrl,
+      applicationCategory: "EntertainmentApplication",
+      operatingSystem: "All",
+      publisher: {
+        "@id": `${siteUrl}/#organization`,
+      },
+    },
   ],
 };
 
@@ -116,7 +128,13 @@ function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.5fr_1fr]">
           <div className="space-y-5 text-left">
             <div className="flex items-center gap-3">
-              <Image src="/f1r-logo.png" alt="Fans First Reactions" width={46} height={46} className="rounded-xl" />
+              <Image
+                src="/f1r-logo.png"
+                alt="Fans First Reactions"
+                width={46}
+                height={46}
+                className="rounded-xl"
+              />
               <h2 className="text-lg font-black text-white">
                 Fans <span className="text-[#67e1f9]">First</span> Reactions
               </h2>
@@ -144,11 +162,17 @@ function Footer() {
           </div>
 
           <div className="text-left md:text-right">
-            <h2 className="text-lg font-black uppercase tracking-[0.25em] text-[#67e1f9]">Legal</h2>
+            <h2 className="text-lg font-black uppercase tracking-[0.25em] text-[#67e1f9]">
+              Legal
+            </h2>
 
             <nav className="mt-5 flex flex-col gap-3">
               {legalLinks.map((link) => (
-                <Link key={link.href} href={link.href} className="font-bold text-zinc-400 hover:text-[#67e1f9]">
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="font-bold text-zinc-400 hover:text-[#67e1f9]"
+                >
                   {link.label}
                 </Link>
               ))}
@@ -165,7 +189,10 @@ function Footer() {
             Submit your football reaction or watchalong channel to Fans First Reactions and get discovered by football fans worldwide.
           </p>
 
-          <Link href="/become-a-creator" className="mt-7 inline-flex min-w-[230px] justify-center rounded-full bg-[#67e1f9] px-8 py-4 text-lg font-black text-black hover:bg-white">
+          <Link
+            href="/become-a-creator"
+            className="mt-7 inline-flex min-w-[230px] justify-center rounded-full bg-[#67e1f9] px-8 py-4 text-lg font-black text-black hover:bg-white"
+          >
             Submit Your Channel
           </Link>
         </div>
@@ -194,10 +221,24 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full bg-black text-white">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-GKW4DGHPYG"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-GKW4DGHPYG');
+          `}
+        </Script>
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+
         <Header />
         {children}
         <Footer />
