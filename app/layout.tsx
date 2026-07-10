@@ -20,12 +20,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+
   title: {
     default: "Fans First Reactions",
     template: "%s | Fans First Reactions",
   },
+
   description:
     "Discover football fan reaction creators, supporter channels, club pages, match fixtures, and YouTube description tools for football content.",
+
   keywords: [
     "football fan reactions",
     "football reaction channels",
@@ -35,21 +38,35 @@ export const metadata: Metadata = {
     "YouTube football reactions",
     "Fans First Reactions",
   ],
+
   applicationName: "Fans First Reactions",
-  authors: [{ name: "Fans First Reactions" }],
+
+  authors: [
+    {
+      name: "Fans First Reactions",
+    },
+  ],
+
   creator: "Fans First Reactions",
   publisher: "Fans First Reactions",
+
   alternates: {
     canonical: siteUrl,
   },
+
   openGraph: {
     title: "Fans First Reactions",
+
     description:
       "Discover football fan reaction creators, supporter channels, club pages, match fixtures, and YouTube description tools.",
+
     url: siteUrl,
     siteName: "Fans First Reactions",
     type: "website",
     locale: "en_GB",
+
+    // Keep the current social image because your WhatsApp
+    // and iMessage previews are already working correctly.
     images: [
       {
         url: `${siteUrl}/f1r-logo.png`,
@@ -59,17 +76,48 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: "Fans First Reactions",
+
     description:
       "Discover football fan reaction creators, supporter channels, club pages, match fixtures, and YouTube description tools.",
+
+    // Keep the current social image.
     images: [`${siteUrl}/f1r-logo.png`],
   },
+
   icons: {
-    icon: "/favicon.ico",
-    apple: "/f1r-logo.png",
+    icon: [
+      {
+        url: "/favicon.svg",
+        type: "image/svg+xml",
+      },
+      {
+        url: "/favicon-96x96.png",
+        sizes: "96x96",
+        type: "image/png",
+      },
+      {
+        url: "/favicon.ico",
+        sizes: "any",
+      },
+    ],
+
+    shortcut: ["/favicon.ico"],
+
+    apple: [
+      {
+        url: "/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
   },
+
+  manifest: "/site.webmanifest",
+
   robots: {
     index: true,
     follow: true,
@@ -86,6 +134,7 @@ const legalLinks = [
 
 const jsonLd = {
   "@context": "https://schema.org",
+
   "@graph": [
     {
       "@type": "Organization",
@@ -93,20 +142,24 @@ const jsonLd = {
       name: "Fans First Reactions",
       url: siteUrl,
       logo: `${siteUrl}/f1r-logo.png`,
+
       sameAs: [
         "https://www.youtube.com/@FansFirstReactions",
         "https://x.com/Fans1R",
       ],
     },
+
     {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
       url: siteUrl,
       name: "Fans First Reactions",
+
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
     },
+
     {
       "@type": "WebApplication",
       "@id": `${siteUrl}/#webapplication`,
@@ -114,6 +167,7 @@ const jsonLd = {
       url: siteUrl,
       applicationCategory: "EntertainmentApplication",
       operatingSystem: "All",
+
       publisher: {
         "@id": `${siteUrl}/#organization`,
       },
@@ -135,26 +189,40 @@ function Footer() {
                 height={46}
                 className="rounded-xl"
               />
+
               <h2 className="text-lg font-black text-white">
                 Fans <span className="text-[#67e1f9]">First</span> Reactions
               </h2>
             </div>
 
             <p className="max-w-3xl leading-relaxed">
-              Fans First Reactions is an independent football creator directory that helps supporters discover football content creators and communities from across clubs and leagues.
+              Fans First Reactions is an independent football creator
+              directory that helps supporters discover football content
+              creators and communities from across clubs and leagues.
             </p>
 
             <p className="max-w-3xl leading-relaxed">
-              We also provide a Creator Guide that walks creators through building a professional football watchalong or reaction channel setup, including software, overlays, equipment, branding, and monetisation.
+              We also provide a Creator Guide that walks creators through
+              building a professional football watchalong or reaction channel
+              setup, including software, overlays, equipment, branding, and
+              monetisation.
             </p>
 
             <p className="max-w-3xl leading-relaxed">
-              We index publicly available creator information for discovery purposes. If you&apos;re a creator and would like your profile updated, corrected, or removed, please visit our{" "}
-              <Link href="/copyright" className="font-bold text-[#67e1f9] hover:underline">
+              We index publicly available creator information for discovery
+              purposes. If you&apos;re a creator and would like your profile
+              updated, corrected, or removed, please visit our{" "}
+              <Link
+                href="/copyright"
+                className="font-bold text-[#67e1f9] hover:underline"
+              >
                 Copyright & Creator Requests
               </Link>{" "}
               page or{" "}
-              <Link href="/contact" className="font-bold text-[#67e1f9] hover:underline">
+              <Link
+                href="/contact"
+                className="font-bold text-[#67e1f9] hover:underline"
+              >
                 contact us
               </Link>
               .
@@ -186,7 +254,8 @@ function Footer() {
           </h3>
 
           <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-zinc-400">
-            Submit your football reaction or watchalong channel to Fans First Reactions and get discovered by football fans worldwide.
+            Submit your football reaction or watchalong channel to Fans First
+            Reactions and get discovered by football fans worldwide.
           </p>
 
           <Link
@@ -201,11 +270,14 @@ function Footer() {
           <p>© 2026 FanFirstReactions.com</p>
 
           <p className="mx-auto mt-3 max-w-4xl leading-relaxed">
-            The independent football creator directory. Maintained by Fans First Reactions. Built with the football community.
+            The independent football creator directory. Maintained by Fans
+            First Reactions. Built with the football community.
           </p>
 
           <p className="mx-auto mt-4 max-w-4xl leading-relaxed">
-            Club crests, logos, trademarks, and team names are the property of their respective owners and are used here for identification and informational purposes only.
+            Club crests, logos, trademarks, and team names are the property of
+            their respective owners and are used here for identification and
+            informational purposes only.
           </p>
         </div>
       </div>
@@ -219,16 +291,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
       <body className="min-h-full bg-black text-white">
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-GKW4DGHPYG"
           strategy="afterInteractive"
         />
+
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+
+            function gtag() {
+              window.dataLayer.push(arguments);
+            }
+
             gtag('js', new Date());
             gtag('config', 'G-GKW4DGHPYG');
           `}
@@ -236,11 +316,15 @@ export default function RootLayout({
 
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
+          }}
         />
 
         <Header />
+
         {children}
+
         <Footer />
       </body>
     </html>
