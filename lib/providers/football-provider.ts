@@ -1,5 +1,6 @@
 export type Fixture = {
   id: string;
+  leagueId: number;
   league: string;
   leagueLogo: string;
   homeTeam: string;

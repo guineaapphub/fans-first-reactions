@@ -15,6 +15,7 @@ type Creator = {
 
 type Fixture = {
   id: string;
+  leagueId: number;
   league: string;
   leagueLogo: string;
   homeTeam: string;
@@ -28,22 +29,66 @@ const FOOTBALL_PREDICTOR_URL =
   "https://www.playpredictwin.com/leagues?join=3088746C";
 
 const LEAGUES = [
-  { id: "all", label: "ALL", logo: null },
-  { id: "Premier League", label: "PL", logo: "/league-logos/premier-league.png" },
-  { id: "Championship", label: "CH", logo: "/league-logos/championship.png" },
-  { id: "League One", label: "L1", logo: "/league-logos/league-one.png" },
-  { id: "League Two", label: "L2", logo: "/league-logos/league-two.png" },
-  { id: "Premiership", label: "SP", logo: "/league-logos/scottish-premiership.png" },
-  { id: "Bundesliga", label: "BL", logo: "/league-logos/bundesliga.png" },
-  { id: "La Liga", label: "LL", logo: "/league-logos/la-liga.png" },
-  { id: "Serie A", label: "SA", logo: "/league-logos/serie-a.png" },
-  { id: "Ligue 1", label: "L1", logo: "/league-logos/ligue-1.png" },
-  { id: "UEFA Champions League", label: "UCL", logo: "/league-logos/champions-league.png" },
-  { id: "UEFA Europa League", label: "UEL", logo: "/league-logos/europa-league.png" },
+  { id: 0, label: "ALL", logo: null },
+  {
+    id: 39,
+    label: "PL",
+    logo: "/league-logos/premier-league.png",
+  },
+  {
+    id: 40,
+    label: "CH",
+    logo: "/league-logos/championship.png",
+  },
+  {
+    id: 41,
+    label: "L1",
+    logo: "/league-logos/league-one.png",
+  },
+  {
+    id: 42,
+    label: "L2",
+    logo: "/league-logos/league-two.png",
+  },
+  {
+    id: 179,
+    label: "SP",
+    logo: "/league-logos/scottish-premiership.png",
+  },
+  {
+    id: 78,
+    label: "BL",
+    logo: "/league-logos/bundesliga.png",
+  },
+  {
+    id: 140,
+    label: "LL",
+    logo: "/league-logos/la-liga.png",
+  },
+  {
+    id: 135,
+    label: "SA",
+    logo: "/league-logos/serie-a.png",
+  },
+  {
+    id: 61,
+    label: "L1",
+    logo: "/league-logos/ligue-1.png",
+  },
+  {
+    id: 2,
+    label: "UCL",
+    logo: "/league-logos/champions-league.png",
+  },
+  {
+    id: 3,
+    label: "UEL",
+    logo: "/league-logos/europa-league.png",
+  },
 ];
 
-function getLocalLeagueLogo(league: string) {
-  return LEAGUES.find((item) => item.id === league)?.logo || null;
+function getLocalLeagueLogo(leagueId: number) {
+  return LEAGUES.find((item) => item.id === leagueId)?.logo || null;
 }
 
 const CLUB_ALIASES: Record<string, string[]> = {
@@ -65,18 +110,25 @@ function clubMatches(creatorClub: string, fixtureClub: string) {
   if (creator === fixture) return true;
 
   const aliases = CLUB_ALIASES[fixtureClub] || [];
-  return aliases.some((alias) => normalizeClubName(alias) === creator);
+
+  return aliases.some(
+    (alias) => normalizeClubName(alias) === creator
+  );
 }
 
 function getCreatorsForClub(creators: Creator[], club: string) {
   return creators
-    .filter((creator) => creator.club && clubMatches(creator.club, club))
+    .filter(
+      (creator) =>
+        creator.club && clubMatches(creator.club, club)
+    )
     .slice(0, 4);
 }
 
 function getCreatorCount(creators: Creator[], club: string) {
   return creators.filter(
-    (creator) => creator.club && clubMatches(creator.club, club)
+    (creator) =>
+      creator.club && clubMatches(creator.club, club)
   ).length;
 }
 
@@ -114,7 +166,11 @@ function formatFixtureDate(kickoff: string) {
   }).format(new Date(kickoff));
 }
 
-function CreatorChip({ creator }: { creator: Creator }) {
+function CreatorChip({
+  creator,
+}: {
+  creator: Creator;
+}) {
   return (
     <Link
       href={`/creators/${creator.slug}`}
@@ -156,11 +212,19 @@ function AffiliateBox() {
         <p className="text-xs font-black uppercase tracking-[0.2em] text-[#67e1f9]">
           The Football Predictor League
         </p>
-        <p className="mt-1 text-sm font-black text-white">Play. Predict. Win.</p>
-        <p className="mt-1 text-xs text-zinc-400">
-          Call every scoreline. Climb the leaderboard. Show your mates you know football.
+
+        <p className="mt-1 text-sm font-black text-white">
+          Play. Predict. Win.
         </p>
-        <p className="mt-2 text-xs font-black text-[#67e1f9]">FREE to play →</p>
+
+        <p className="mt-1 text-xs text-zinc-400">
+          Call every scoreline. Climb the leaderboard. Show your mates you know
+          football.
+        </p>
+
+        <p className="mt-2 text-xs font-black text-[#67e1f9]">
+          FREE to play →
+        </p>
       </div>
     </a>
   );
@@ -173,7 +237,7 @@ export default function FixtureFilters({
   fixtures?: Fixture[];
   creators?: Creator[];
 }) {
-  const [selectedLeague, setSelectedLeague] = useState("all");
+  const [selectedLeague, setSelectedLeague] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
 
@@ -204,7 +268,7 @@ export default function FixtureFilters({
 
     return safeFixtures.filter((fixture) => {
       const leagueMatches =
-        selectedLeague === "all" || fixture.league === selectedLeague;
+        selectedLeague === 0 || fixture.leagueId === selectedLeague;
 
       const searchMatches =
         !query ||
@@ -285,6 +349,7 @@ export default function FixtureFilters({
                     className="h-5 w-5 object-contain"
                   />
                 )}
+
                 <span>{league.label}</span>
               </span>
             </button>
@@ -294,7 +359,10 @@ export default function FixtureFilters({
 
       {filteredFixtures.length === 0 ? (
         <div className="rounded-3xl border border-[#67e1f9]/40 bg-[#070b14] p-8">
-          <h2 className="text-2xl font-black">No upcoming fixtures found yet.</h2>
+          <h2 className="text-2xl font-black">
+            No upcoming fixtures found yet.
+          </h2>
+
           <p className="mt-3 text-zinc-400">
             No fixtures matched your selected league or search.
           </p>
@@ -302,14 +370,29 @@ export default function FixtureFilters({
       ) : (
         <div className="space-y-8">
           {filteredFixtures.map((fixture) => {
-            const homeCreators = getCreatorsForClub(safeCreators, fixture.homeTeam);
-            const awayCreators = getCreatorsForClub(safeCreators, fixture.awayTeam);
+            const homeCreators = getCreatorsForClub(
+              safeCreators,
+              fixture.homeTeam
+            );
 
-            const homeTotal = getCreatorCount(safeCreators, fixture.homeTeam);
-            const awayTotal = getCreatorCount(safeCreators, fixture.awayTeam);
+            const awayCreators = getCreatorsForClub(
+              safeCreators,
+              fixture.awayTeam
+            );
+
+            const homeTotal = getCreatorCount(
+              safeCreators,
+              fixture.homeTeam
+            );
+
+            const awayTotal = getCreatorCount(
+              safeCreators,
+              fixture.awayTeam
+            );
 
             const displayLeagueLogo =
-              getLocalLeagueLogo(fixture.league) || fixture.leagueLogo;
+              getLocalLeagueLogo(fixture.leagueId) ||
+              fixture.leagueLogo;
 
             return (
               <div
@@ -348,7 +431,10 @@ export default function FixtureFilters({
                           className="h-7 w-7 object-contain"
                         />
                       )}
-                      <p className="text-zinc-400">{fixture.league}</p>
+
+                      <p className="text-zinc-400">
+                        {fixture.league}
+                      </p>
                     </div>
                   </div>
 
@@ -364,10 +450,15 @@ export default function FixtureFilters({
                     <div className="flex flex-col gap-3">
                       {homeCreators.length > 0 ? (
                         homeCreators.map((creator) => (
-                          <CreatorChip key={creator.slug} creator={creator} />
+                          <CreatorChip
+                            key={creator.slug}
+                            creator={creator}
+                          />
                         ))
                       ) : (
-                        <p className="text-zinc-500">No creators found yet.</p>
+                        <p className="text-zinc-500">
+                          No creators found yet.
+                        </p>
                       )}
                     </div>
 
@@ -389,10 +480,15 @@ export default function FixtureFilters({
                     <div className="flex flex-col gap-3">
                       {awayCreators.length > 0 ? (
                         awayCreators.map((creator) => (
-                          <CreatorChip key={creator.slug} creator={creator} />
+                          <CreatorChip
+                            key={creator.slug}
+                            creator={creator}
+                          />
                         ))
                       ) : (
-                        <p className="text-zinc-500">No creators found yet.</p>
+                        <p className="text-zinc-500">
+                          No creators found yet.
+                        </p>
                       )}
                     </div>
 
