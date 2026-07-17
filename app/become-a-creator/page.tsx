@@ -1,18 +1,18 @@
 const creatorTools = [
   {
     title: "OBS Studio",
-    category: "Free Streaming Software",
+    category: "Recording & Streaming Software",
     text: "OBS Studio is one of the most powerful free streaming platforms available. Use OBS for live streaming, video recording, multiple cameras, browser sources, and advanced scene management.",
-    button: "Download OBS Studio",
+    button: "Visit Website",
     link: "https://obsproject.com/",
     logo: "/images/logos/obs-logo.png",
   },
   {
     title: "StreamYard",
     category: "Recommended",
-    text: "StreamYard is ideal for creators who want to go live quickly without learning OBS. It is useful for beginner creators, guest interviews, football discussions, and browser-based streaming.",
-    button: "Try StreamYard",
-    link: "https://partners.streamyard.com/home",
+    text: "StreamYard is a professional live streaming and recording studio that runs entirely in your browser. Stream live to YouTube, Facebook, and other platforms, or record high-quality content with ease.",
+    button: "Visit Website",
+    link: "https://streamyard.com/?fpr=f1r",
     logo: "/images/logos/streamyard-logo.png",
   },
 ];
@@ -22,7 +22,7 @@ const broadcastTools = [
     title: "Stream Builder",
     category: "Recommended",
     text: "Stream Builder gives football fan channels broadcast-quality tools such as live data overlays, match-day automation, sponsor integration, superchat displays, and professional stream graphics.",
-    button: "Visit Stream Builder",
+    button: "Visit Website",
     link: "https://www.stream-builder.co.uk/?referral=F1R",
     logo: "/images/logos/stream-builder-logo.png",
   },
@@ -30,7 +30,7 @@ const broadcastTools = [
     title: "Uno Overlays",
     category: "Stream Overlays",
     text: "Uno Overlays helps football creators add scoreboards, match clocks, team lineups, goal notifications, red cards, and match statistics to their live streams.",
-    button: "Get Uno Overlays",
+    button: "Visit Website",
     link: "https://overlays.uno/signup?ref=HG8R9",
     logo: "/images/logos/uno-logo.png",
   },
@@ -66,46 +66,45 @@ const learnItems = [
 
 const buildBrandTools = [
   {
-    title: "Crispy Stix",
-    category: "Cartoon-Style Artwork",
-    text: "Crispy Stix is an AI-powered software tool that helps users create, format, and sell print-ready digital and physical stickers. I personally use Crispy Stix to transform images into cartoon-style artwork for YouTube thumbnails.",
-    features: [
-      "Cartoon-style thumbnail graphics",
-      "AI image transformations",
-      "Sticker creation",
-      "Digital products",
-      "Creator branding",
-      "Unique thumbnail designs",
-    ],
-    link: "https://warriorplus.com/o2/a/rb136m4/0",
-    logo: "/images/logos/crispy-stix-logo.png",
-  },
+  title: "CapCut",
+  category: "Video Editing Software",
+  text: "CapCut is one of the world's most popular video editing platforms. It helps football creators edit YouTube videos, Shorts, TikToks and social media content with powerful AI tools, captions, transitions and effects.",
+  button: "Visit Website",
+  features: [
+    "AI video editing",
+    "Auto captions",
+    "Short-form video tools",
+    "Templates & effects",
+    "Mobile & desktop editing",
+    "YouTube creator workflow",
+  ],
+  link: "https://capcutaffiliateprogram.pxf.io/c/7415002/1876054/22474",
+  logo: "/images/logos/capcut-logo.png",
+},
   {
-    title: "Pixelied",
-    category: "AI Thumbnail & Design",
-    text: "Pixelied is a cloud-based graphic design and photo editing platform that helps creators make branded visuals, YouTube thumbnails, social media graphics, and AI-edited images without needing Photoshop.",
-    features: [
-      "YouTube thumbnail creation",
-      "AI image generation",
-      "Background remover",
-      "Stock photos and icons",
-      "Brand kits and templates",
-      "Social media graphics",
-    ],
-    link: "https://pixelied.com/home",
-    logo: "/images/logos/pixelied-logo.png",
-  },
+  title: "ClickDesigns",
+  category: "Graphic Design",
+  text: "ClickDesigns is an easy-to-use graphic design platform that helps football creators design YouTube thumbnails, social media graphics, channel branding, logos, and promotional content without needing advanced design skills.",
+  button: "Visit Website",
+  features: [
+    "YouTube thumbnail templates",
+    "Social media graphics",
+    "Logo creation",
+    "Football creator branding",
+    "Drag-and-drop editor",
+  ],
+  link: "https://clickdesigns.com/dg/cd/#aff=fansfirstreactions591e",
+  logo: "/images/logos/clickdesigns-logo.png",
+},
   {
     title: "Groove.cm",
     category: "Website Builder",
     text: "Groove.cm is an all-in-one digital marketing and e-commerce platform for creators, entrepreneurs, and online businesses. It can help football creators build websites, landing pages, funnels, email campaigns, product pages, blogs, and membership sites.",
+    button: "Visit Website",
     features: [
-      "Build websites and landing pages",
-      "Create sales funnels",
       "Sell digital and physical products",
       "Build email marketing campaigns",
       "Host membership sites and courses",
-      "Create blogs and content hubs",
       "Host videos and webinars",
     ],
     link: "https://gcm.groovesell.com/a/p9Bed10Kqtz2",
@@ -115,8 +114,8 @@ const buildBrandTools = [
     title: "DaVinci Resolve",
     category: "Video Editing Software",
     text: "DaVinci Resolve is a powerful video editing application for YouTube creators. It combines video editing, colour correction, visual effects, motion graphics, and audio production.",
+    button: "Visit Website",
     features: [
-      "Professional video editing",
       "Colour grading",
       "Motion graphics",
       "Visual effects",
@@ -133,49 +132,123 @@ const affiliatePartners = [
   {
     id: "okayjersey",
     title: "OKAYJERSEY",
+    category: "Football Shirts",
     text: "Football shirts and fan gear for your watchalong setup, thumbnails, and creator branding.",
-    button: "Promote this Affiliate",
+    button: "Visit Website",
     link: "https://okayjersey.com?ref=2376",
     logo: "/images/logos/okayjersey-logo.png",
   },
   {
     id: "rfm26",
     title: "RFM26",
+    category: "Mobile Football Game",
     text: "If you ever lost whole weekends to Championship Manager or early Football Manager games, RFM26 will hit you right in the nostalgia.",
-    button: "Promote this Affiliate",
+    button: "Visit Website",
     link: "https://rfm25.onelink.me/AFls/F1R",
     logo: "/images/logos/rfm26-logo.png",
   },
   {
     id: "neon-signs",
     title: "Neon Signs UK",
+    category: "LED Neon Signs",
     text: "Custom neon signs to make your streaming background look more professional.",
-    button: "Promote this Affiliate",
+    button: "Visit Website",
     link: "https://neonsigns-uk.com?sca_ref=11238438.eMgCDmeCPYt3G8",
     logo: "/images/logos/neon-signs-logo.png",
   },
   {
     id: "3pm2ft",
     title: "3PM2FT Football",
+    category: "Football Card Game",
     text: "Vidiprinter football card game for football fans, creators, and watchalong communities.",
-    button: "Promote this Affiliate",
+    button: "Visit Website",
     link: "https://www.3pm2ft.com/F1R-Ref",
     logo: "/images/logos/3pm2ft-logo.png",
   },
   {
     id: "cardsplug",
     title: "CardsPlug",
+    category: "Real-Life Football Cards",
     text: "CardsPlug creates personalised physical replica football cards inspired by popular football video games. Customise cards with photos, names, club crests, and ratings.",
-    button: "Promote this Affiliate",
+    button: "Visit Website",
     link: "https://cardsplug.com/f1r",
     logo: "/images/logos/cardsplug-logo.png",
   },
+  {
+    id: "vidiq",
+    title: "vidIQ",
+    category: "YouTube Growth & SEO",
+    text: "vidIQ is a YouTube growth platform that helps football creators research keywords, optimise titles, discover trending topics, and grow their YouTube channels with powerful analytics and AI tools.",
+    button: "Visit Website",
+    features: [
+      "YouTube keyword research",
+    "Video SEO tools",
+    "AI title recommendations",
+    "Daily video ideas",
+    "Channel analytics",
+    "Competitor research",
+  ],
+  link: "https://vidiq.com/codeF1R",
+  logo: "/images/logos/vidiq-logo.png",
+},
+{
+  id: "3retro",
+  title: "3Retro",
+  category: "Retro Football Shirts",
+  text: "3Retro specialises in classic and vintage football shirts from clubs and national teams around the world. It's the perfect place for football fans looking to own iconic kits from past eras.",
+  button: "Visit Website",
+  features: [
+    "Classic football shirts",
+    "Retro club kits",
+    "International team shirts",
+    "Vintage football apparel",
+    "Official licensed products",
+    "Worldwide delivery",
+  ],
+  link: "https://assets.ikhnaie.me/click.html?wgcampaignid=1747790&wgprogramid=310484&wgtarget=https%3A%2F%2Fwww.3retro.com%2F",
+  logo: "/images/logos/3retro-logo.png",
+},
+{
+  id: "allstarsignings",
+  title: "All Star Signings",
+  category: "Sports Memorabilia",
+  text: "All Star Signings offers authentic signed football memorabilia from legendary players and clubs, making it the perfect destination for collectors and passionate football fans.",
+  button: "Visit Website",
+  features: [
+    "Signed football shirts",
+    "Autographed photos",
+    "Framed memorabilia",
+    "Certificates of authenticity",
+    "Premier League legends",
+    "Great gift ideas",
+  ],
+  link: "https://assets.ikhnaie.me/click.html?wgcampaignid=1747790&wgprogramid=295320&wgtarget=https%3A%2F%2Fallstarsignings.com%2F",
+  logo: "/images/logos/allstarsignings-logo.png",
+},
+{
+  id: "playpredictwin",
+  title: "Play Predict Win",
+  category: "Football Predictor Game",
+  text: "Play Predict Win is a free football prediction game where you can call every scoreline, compete in private leagues with friends, climb the leaderboard, and prove your football knowledge throughout the season.",
+  button: "Visit Website",
+  features: [
+    "Predict every scoreline",
+    "Private leagues with friends",
+    "Live leaderboards",
+    "Points for exact scores",
+    "Free to play",
+    "Bragging rights",
+  ],
+  link: "https://www.playpredictwin.com/leagues?join=3088746C",
+  logo: "/images/logos/playpredictwin-logo.png",
+},
 ];
 
 const emptyAffiliateBoxes = Array.from({ length: 3 }, (_, index) => ({
   id: `empty-affiliate-${index + 1}`,
   title: "Want to Partner With Us?",
-  text: "Have your affiliate link here.",
+  category: "Featured Partner",
+  text: "Have your site featured here.",
   button: "Get in Touch",
   link: "mailto:FansFirstReactions@gmail.com",
   logo: "/images/logos/partner-placeholder-logo.png",
@@ -331,7 +404,7 @@ export default function BecomeCreatorPage() {
               </span>
               <h3 className="mt-5 text-2xl font-black">{tool.title}</h3>
               <p className="mt-4 leading-relaxed text-gray-400">{tool.text}</p>
-              <a href={tool.link} target="_blank" rel="noopener noreferrer" className="mt-6 inline-block font-bold text-[#67e1f9]">
+              <a href={tool.link} target="_blank" rel="noopener noreferrer" className="mt-8 inline-block rounded-full bg-[#67e1f9] px-8 py-4 font-bold text-black hover:opacity-90">
                 {tool.button} →
               </a>
             </div>
@@ -431,7 +504,7 @@ export default function BecomeCreatorPage() {
                 </div>
 
                 <a href={tool.link} target="_blank" rel="noopener noreferrer" className="mt-8 inline-block rounded-full bg-[#67e1f9] px-8 py-4 font-bold text-black">
-                  Use Tool →
+                  {tool.button} →
                 </a>
               </div>
             ))}
@@ -443,7 +516,7 @@ export default function BecomeCreatorPage() {
         <div className="rounded-[36px] border border-[#67e1f9]/30 bg-[#05070a] p-8 md:p-12">
           <div className="text-center">
             <p className="text-sm font-black uppercase tracking-[0.5em] text-[#66e1f8]">
-              Our Affiliate Partners
+              Our Affiliate Partners & Recommended Sites
             </p>
 
             <h2 className="mx-auto mt-5 max-w-5xl text-5xl font-black leading-tight md:text-7xl">
@@ -451,9 +524,8 @@ export default function BecomeCreatorPage() {
             </h2>
 
             <p className="mx-auto mt-8 max-w-4xl text-2xl leading-relaxed text-gray-400">
-              We're very proud to partner with some of the biggest names in the
-              football world. Every partner shares our passion for the beautiful
-              game — click on them below.
+              We partner with trusted brands and recommend tools that help football creators. Every partner shares our passion for the beautiful
+              game — check them out below.
             </p>
           </div>
 
@@ -462,7 +534,7 @@ export default function BecomeCreatorPage() {
               <div key={partner.id} className="rounded-3xl border border-white/10 bg-[#0c1020] p-7">
                 <img src={partner.logo} alt={`${partner.title} logo`} className="mb-5 h-12 w-auto object-contain" />
                 <span className="rounded-full bg-[#67e1f9]/15 px-4 py-2 text-sm font-bold text-[#67e1f9]">
-                  Affiliate partner
+                  {partner.category}
                 </span>
                 <h3 className="mt-5 text-2xl font-bold">{partner.title}</h3>
                 <p className="mt-4 text-gray-400">{partner.text}</p>
