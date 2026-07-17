@@ -259,7 +259,7 @@ function Footer() {
           </p>
 
           <Link
-            href="/become-a-creator"
+            href="/submit"
             className="mt-7 inline-flex min-w-[230px] justify-center rounded-full bg-[#67e1f9] px-8 py-4 text-lg font-black text-black hover:bg-white"
           >
             Submit Your Channel
