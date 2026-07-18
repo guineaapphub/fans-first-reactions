@@ -66,65 +66,88 @@ const learnItems = [
 
 const buildBrandTools = [
   {
-  title: "CapCut",
-  category: "Video Editing Software",
-  text: "CapCut is one of the world's most popular video editing platforms. It helps football creators edit YouTube videos, Shorts, TikToks and social media content with powerful AI tools, captions, transitions and effects.",
-  button: "Visit Website",
-  features: [
-    "AI video editing",
-    "Auto captions",
-    "Short-form video tools",
-    "Templates & effects",
-    "Mobile & desktop editing",
-    "YouTube creator workflow",
-  ],
-  link: "https://capcutaffiliateprogram.pxf.io/c/7415002/1876054/22474",
-  logo: "/images/logos/capcut-logo.png",
-},
-  {
-  title: "ClickDesigns",
-  category: "Graphic Design",
-  text: "ClickDesigns is an easy-to-use graphic design platform that helps football creators design YouTube thumbnails, social media graphics, channel branding, logos, and promotional content without needing advanced design skills.",
-  button: "Visit Website",
-  features: [
-    "YouTube thumbnail templates",
-    "Social media graphics",
-    "Logo creation",
-    "Football creator branding",
-    "Drag-and-drop editor",
-  ],
-  link: "https://clickdesigns.com/dg/cd/#aff=fansfirstreactions591e",
-  logo: "/images/logos/clickdesigns-logo.png",
-},
-  {
-    title: "Groove.cm",
-    category: "Website Builder",
-    text: "Groove.cm is an all-in-one digital marketing and e-commerce platform for creators, entrepreneurs, and online businesses. It can help football creators build websites, landing pages, funnels, email campaigns, product pages, blogs, and membership sites.",
+    title: "CapCut",
+    category: "Video Editing Software",
+    text: "CapCut is one of the world's most popular video editing platforms. It helps football creators edit YouTube videos, Shorts, TikToks and social media content with powerful AI tools, captions, transitions and effects.",
     button: "Visit Website",
     features: [
-      "Sell digital and physical products",
-      "Build email marketing campaigns",
-      "Host membership sites and courses",
-      "Host videos and webinars",
+      "AI video editing",
+      "Auto captions",
+      "Templates & effects",
+      "Mobile & desktop editing",
     ],
-    link: "https://gcm.groovesell.com/a/p9Bed10Kqtz2",
-    logo: "/images/logos/groove-logo.png",
+    link: "https://capcutaffiliateprogram.pxf.io/c/7415002/1876054/22474",
+    logo: "/images/logos/capcut-logo.png",
   },
   {
     title: "DaVinci Resolve",
     category: "Video Editing Software",
-    text: "DaVinci Resolve is a powerful video editing application for YouTube creators. It combines video editing, colour correction, visual effects, motion graphics, and audio production.",
+    text: "DaVinci Resolve is a powerful video editing application for YouTube creators. It combines video editing, colour correction, visual effects, motion graphics, audio production, with free & paid versions available.",
     button: "Visit Website",
     features: [
       "Colour grading",
       "Motion graphics",
       "Visual effects",
       "Audio editing",
-      "YouTube content creation",
-      "Free and paid versions available",
     ],
     link: "https://davinciresolvetitles.com?sca_ref=11574333.1YKHnHVyz10LtZ",
     logo: "/images/logos/davinci-logo.png",
+  },
+  {
+    title: "ClickDesigns",
+    category: "Graphic Design",
+    text: "ClickDesigns is an easy-to-use graphic design platform that helps football creators design YouTube thumbnails, social media graphics, channel branding, and logos without needing advanced design skills.",
+    button: "Visit Website",
+    features: [
+      "YouTube thumbnail templates",
+      "Social media graphics",
+      "Logo creation",
+      "Drag-and-drop editor",
+    ],
+    link: "https://clickdesigns.com/dg/cd/#aff=fansfirstreactions591e",
+    logo: "/images/logos/clickdesigns-logo.png",
+  },
+  {
+    title: "Groove.cm",
+    category: "Website Builder",
+    text: "Groove.cm is an all-in-one digital marketing and e-commerce platform that helps football creators build websites, landing pages, email campaigns, product pages, blogs, and membership sites.",
+    button: "Visit Website",
+    features: [
+      "Build websites and landing pages",
+      "Create email campaigns",
+      "Sell digital and physical products",
+      "Host membership sites and courses",
+    ],
+    link: "https://gcm.groovesell.com/a/p9Bed10Kqtz2",
+    logo: "/images/logos/groove-logo.png",
+  },
+  {
+    title: "UpPromote",
+    category: "Affiliate Marketing Software",
+    text: "UpPromote is an affiliate and referral marketing platform that helps creators and online businesses build affiliate programmes, manage partners, track referrals, automate commissions, and grow long-term recurring revenue.",
+    button: "Visit Website",
+    features: [
+      "Affiliate programme management",
+      "Referral tracking",
+      "Partner dashboards",
+      "Commission tracking",
+    ],
+    link: "https://partners.secomapp.com/apps/up_promote/F1R/c31174de0d8f",
+    logo: "/images/logos/uppromote-logo.png",
+  },
+  {
+    title: "vidIQ",
+    category: "YouTube Growth & SEO",
+    text: "vidIQ is a YouTube growth platform that helps football creators research keywords, optimise titles, discover trending topics, improve SEO, analyse competitors, and grow their YouTube channels.",
+    button: "Visit Website",
+    features: [
+      "YouTube keyword research",
+      "Video SEO tools",
+      "Daily video ideas",
+      "Channel analytics",
+    ],
+    link: "https://vidiq.com/codeF1R",
+    logo: "/images/logos/vidiq-logo.png",
   },
 ];
 
@@ -174,23 +197,6 @@ const affiliatePartners = [
     link: "https://cardsplug.com/f1r",
     logo: "/images/logos/cardsplug-logo.png",
   },
-  {
-    id: "vidiq",
-    title: "vidIQ",
-    category: "YouTube Growth & SEO",
-    text: "vidIQ is a YouTube growth platform that helps football creators research keywords, optimise titles, discover trending topics, and grow their YouTube channels with powerful analytics and AI tools.",
-    button: "Visit Website",
-    features: [
-      "YouTube keyword research",
-    "Video SEO tools",
-    "AI title recommendations",
-    "Daily video ideas",
-    "Channel analytics",
-    "Competitor research",
-  ],
-  link: "https://vidiq.com/codeF1R",
-  logo: "/images/logos/vidiq-logo.png",
-},
 {
   id: "3retro",
   title: "3Retro",
@@ -244,7 +250,7 @@ const affiliatePartners = [
 },
 ];
 
-const emptyAffiliateBoxes = Array.from({ length: 3 }, (_, index) => ({
+const emptyAffiliateBoxes = Array.from({ length: 4 }, (_, index) => ({
   id: `empty-affiliate-${index + 1}`,
   title: "Want to Partner With Us?",
   category: "Featured Partner",
@@ -390,7 +396,7 @@ export default function BecomeCreatorPage() {
       </section>
 
       <section id="tools" className="mx-auto max-w-7xl px-6 py-10 md:px-12">
-        <h2 className="text-4xl font-black">Tools To Use</h2>
+        <h2 className="text-4xl font-black">Live Streaming & Recording Tools</h2>
 
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           {creatorTools.map((tool) => (
@@ -474,20 +480,18 @@ export default function BecomeCreatorPage() {
       <section className="mx-auto max-w-7xl px-6 py-10 md:px-12">
         <div className="rounded-[36px] border border-white/10 bg-[#0c1020] p-8 md:p-12">
           <p className="text-sm font-bold uppercase tracking-[0.4em] text-[#67e1f9]">
-            Build Your Brand
+            CREATOR TOOLKIT
           </p>
 
           <h2 className="mt-4 text-4xl font-black">
-            Grow your love of football into a community & a brand
+            Everything You Need To Grow Your Channel
           </h2>
 
           <p className="mt-6 max-w-4xl text-lg leading-relaxed text-gray-400">
-            Building a recognisable brand can help you grow your audience,
-            promote your content, and create additional revenue opportunities
-            outside of YouTube.
+            If you're passionate about football, there's an audience waiting for your reactions and watchalongs. Our Creator Toolkit brings together everything you need to create better content, grow your audience, promote your channel, and build additional revenue beyond YouTube.
           </p>
 
-          <div className="mt-8 grid gap-6 lg:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-8 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
             {buildBrandTools.map((tool) => (
               <div key={tool.title} className="rounded-3xl border border-white/10 bg-[#081028] p-8">
                 <img src={tool.logo} alt={`${tool.title} logo`} className="mb-5 h-12 w-auto object-contain" />
@@ -531,16 +535,26 @@ export default function BecomeCreatorPage() {
 
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {[...affiliatePartners, ...emptyAffiliateBoxes].map((partner) => (
-              <div key={partner.id} className="rounded-3xl border border-white/10 bg-[#0c1020] p-7">
+              <div
+  key={partner.id}
+  className="flex h-full flex-col rounded-3xl border border-white/10 bg-[#0c1020] p-7"
+>
                 <img src={partner.logo} alt={`${partner.title} logo`} className="mb-5 h-12 w-auto object-contain" />
                 <span className="rounded-full bg-[#67e1f9]/15 px-4 py-2 text-sm font-bold text-[#67e1f9]">
                   {partner.category}
                 </span>
                 <h3 className="mt-5 text-2xl font-bold">{partner.title}</h3>
                 <p className="mt-4 text-gray-400">{partner.text}</p>
-                <a href={partner.link} target="_blank" rel="noopener noreferrer" className="mt-6 inline-block rounded-full border border-[#67e1f9]/50 px-6 py-3 font-bold text-[#67e1f9] hover:bg-[#67e1f9] hover:text-black">
-                  {partner.button} →
-                </a>
+                <div className="mt-auto pt-6">
+  <a
+    href={partner.link}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-block rounded-full border border-[#67e1f9]/50 px-6 py-3 font-bold text-[#67e1f9] hover:bg-[#67e1f9] hover:text-black"
+  >
+    {partner.button} →
+  </a>
+</div>
               </div>
             ))}
           </div>
