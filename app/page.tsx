@@ -61,7 +61,36 @@ function creatorHref(creator: Creator) {
 function safeText(value?: string | null) {
   return value && value.trim() ? value : "Football fan reaction creator.";
 }
+function countryFlag(country?: string | null) {
+  if (!country) return null;
 
+  const flags: Record<string, string> = {
+    Australia: "au",
+    Belgium: "be",
+    Canada: "ca",
+    Colombia: "co",
+    England: "gb-eng",
+    France: "fr",
+    Germany: "de",
+    India: "in",
+    Indonesia: "id",
+    Ireland: "ie",
+    Italy: "it",
+    Jordan: "jo",
+    Latvia: "lv",
+    Nigeria: "ng",
+    Scotland: "gb-sct",
+    "South Korea": "kr",
+    Spain: "es",
+    Sweden: "se",
+    Uganda: "ug",
+    USA: "us",
+  };
+
+  const code = flags[country];
+
+  return code ? `/flags/${code}.svg` : null;
+}
 export default function Home() {
   const [creators, setCreators] = useState<Creator[]>([]);
   const [fixtures, setFixtures] = useState<Fixture[]>([]);
@@ -200,8 +229,19 @@ export default function Home() {
                 href={creatorHref(creator)}
                 className="rounded-3xl border border-[#67e1f9]/30 bg-[#0c1020] p-6 transition hover:border-[#67e1f9]"
               >
-                <h3 className="text-xl font-black">{creator.name}</h3>
-                <p className="text-zinc-400">{creator.club}</p>
+               <h3 className="text-xl font-black">{creator.name}</h3>
+
+<div className="mt-2 flex items-center gap-2 text-zinc-400">
+  <p>{creator.club}</p>
+
+  {creator.country && countryFlag(creator.country) && (
+    <img
+      src={countryFlag(creator.country) || ""}
+      alt={creator.country}
+      className="h-4 w-auto"
+    />
+  )}
+</div>
               </Link>
             ))}
           </div>
@@ -239,8 +279,18 @@ export default function Home() {
 
               <div className="p-6">
                 <h3 className="text-2xl font-black">{creator.name}</h3>
-                <p className="mt-1 text-gray-400">{creator.club}</p>
 
+<div className="mt-1 flex items-center gap-2 text-gray-400">
+  <p>{creator.club}</p>
+
+  {creator.country && (
+    <img
+      src={countryFlag(creator.country) || ""}
+      alt={creator.country}
+      className="h-4 w-auto"
+    />
+  )}
+</div>
                 <p className="mt-6 text-xl font-black text-[#67e1f9]">
                   {displaySubs(creator)} subscribers
                 </p>

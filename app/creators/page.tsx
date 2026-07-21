@@ -54,7 +54,36 @@ function normaliseLeague(league: string | null | undefined) {
 function getSubscribers(creator: Creator) {
   return creator.subscribers || creator.subscriber_count || "Not listed";
 }
+function countryFlag(country?: string | null) {
+  if (!country) return null;
 
+  const flags: Record<string, string> = {
+    Australia: "au",
+    Belgium: "be",
+    Canada: "ca",
+    Colombia: "co",
+    England: "gb-eng",
+    France: "fr",
+    Germany: "de",
+    India: "in",
+    Indonesia: "id",
+    Ireland: "ie",
+    Italy: "it",
+    Jordan: "jo",
+    Latvia: "lv",
+    Nigeria: "ng",
+    Scotland: "gb-sct",
+    "South Korea": "kr",
+    Spain: "es",
+    Sweden: "se",
+    Uganda: "ug",
+    USA: "us",
+  };
+
+  const code = flags[country];
+
+  return code ? `/flags/${code}.svg` : null;
+}
 export default function CreatorsPage() {
   const router = useRouter();
 
@@ -345,9 +374,20 @@ export default function CreatorsPage() {
                     )}
 
                     <h3 className="text-2xl font-black">{creator.name}</h3>
-                    <p className="mt-2 text-gray-400">{creator.club}</p>
-                    <p className="mt-2 text-sm text-gray-500">{creator.league}</p>
 
+<div className="mt-2 flex items-center gap-2 text-gray-400">
+  <p>{creator.club}</p>
+
+  {creator.country && countryFlag(creator.country) && (
+    <img
+      src={countryFlag(creator.country) || ""}
+      alt={creator.country}
+      className="h-4 w-auto"
+    />
+  )}
+</div>
+
+<p className="mt-2 text-sm text-gray-500">{creator.league}</p>
                     <p className="mt-4 font-black text-[#67e1f9]">
                       {getSubscribers(creator)} subscribers
                     </p>

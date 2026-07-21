@@ -17,7 +17,36 @@ function titleFromSlug(slug: string) {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 }
+function countryFlag(country?: string | null) {
+  if (!country) return null;
 
+  const flags: Record<string, string> = {
+    Australia: "au",
+    Belgium: "be",
+    Canada: "ca",
+    Colombia: "co",
+    England: "gb-eng",
+    France: "fr",
+    Germany: "de",
+    India: "in",
+    Indonesia: "id",
+    Ireland: "ie",
+    Italy: "it",
+    Jordan: "jo",
+    Latvia: "lv",
+    Nigeria: "ng",
+    Scotland: "gb-sct",
+    "South Korea": "kr",
+    Spain: "es",
+    Sweden: "se",
+    Uganda: "ug",
+    USA: "us",
+  };
+
+  const code = flags[country];
+
+  return code ? `/flags/${code}.svg` : null;
+}
 export default async function ClubPage({
   params,
 }: {
@@ -43,8 +72,36 @@ export default async function ClubPage({
   }
 
   const clubName = creators[0].club || titleFromSlug(slug);
-  const league = creators[0].league || "Football";
-  const country = creators[0].country || "Unknown";
+const league = creators[0].league || "Football";
+const country = clubCountry(clubName, league);
+
+function clubCountry(club: string, league?: string | null) {
+  const clubCountries: Record<string, string> = {
+    Barcelona: "Spain",
+    "AC Milan": "Italy",
+    "Man United": "England",
+    Arsenal: "England",
+    Rangers: "Scotland",
+  };
+
+  const leagueCountries: Record<string, string> = {
+    "Premier League": "England",
+    Championship: "England",
+    "League One": "England",
+    "League Two": "England",
+    "Scottish Premiership": "Scotland",
+    "La Liga": "Spain",
+    "Serie A": "Italy",
+    Bundesliga: "Germany",
+    "Ligue 1": "France",
+  };
+
+  return (
+    clubCountries[club.trim()] ||
+    leagueCountries[String(league || "").trim()] ||
+    null
+  );
+}
 
   return (
     <main className="min-h-screen bg-black text-white">
@@ -63,9 +120,17 @@ export default async function ClubPage({
               {clubName}
             </h1>
 
-            <p className="mt-5 text-2xl font-bold text-gray-300">
-              {creators.length} creators • {country}
-            </p>
+            <div className="mt-5 flex items-center gap-2 text-2xl font-bold text-gray-300">
+  <p>{creators.length} creators</p>
+
+  {countryFlag(country) && (
+    <img
+      src={countryFlag(country) || ""}
+      alt={country || ""}
+      className="h-4 w-auto"
+    />
+  )}
+</div>
 
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
@@ -122,9 +187,17 @@ export default async function ClubPage({
 
                   <div>
                     <h3 className="text-2xl font-black">{name}</h3>
-                    <p className="text-gray-400">
-                      {creator.club} • {creator.country || "Unknown"}
-                    </p>
+                    <div className="flex items-center gap-2 text-gray-400">
+  <p>{creator.club}</p>
+
+  {creator.country && countryFlag(creator.country) && (
+    <img
+      src={countryFlag(creator.country) || ""}
+      alt={creator.country}
+      className="h-4 w-auto"
+    />
+  )}
+</div>
                   </div>
                 </div>
 

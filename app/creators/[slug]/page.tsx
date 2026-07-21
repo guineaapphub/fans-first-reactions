@@ -20,6 +20,37 @@ function getSubscribers(creator: any) {
   return creator.subscribers || creator.subscriber_count || "Not listed";
 }
 
+function countryFlag(country?: string | null) {
+  if (!country) return null;
+
+  const flags: Record<string, string> = {
+    Australia: "au",
+    Belgium: "be",
+    Canada: "ca",
+    Colombia: "co",
+    England: "gb-eng",
+    France: "fr",
+    Germany: "de",
+    India: "in",
+    Indonesia: "id",
+    Ireland: "ie",
+    Italy: "it",
+    Jordan: "jo",
+    Latvia: "lv",
+    Nigeria: "ng",
+    Scotland: "gb-sct",
+    "South Korea": "kr",
+    Spain: "es",
+    Sweden: "se",
+    Uganda: "ug",
+    USA: "us",
+  };
+
+  const code = flags[country];
+
+  return code ? `/flags/${code}.svg` : null;
+}
+
 export default async function CreatorProfilePage({
   params,
 }: {
@@ -93,9 +124,17 @@ export default async function CreatorProfilePage({
 
               <h1 className="mt-4 text-5xl font-black md:text-7xl">{name}</h1>
 
-              <p className="mt-5 text-2xl font-bold text-gray-300">
-                {clubName} • {creator.country || "Unknown"}
-              </p>
+              <div className="mt-5 flex items-center gap-2 text-2xl font-bold text-gray-300">
+  <p>{clubName}</p>
+
+  {creator.country && countryFlag(creator.country) && (
+    <img
+      src={countryFlag(creator.country) || ""}
+      alt={creator.country}
+      className="h-4 w-auto"
+    />
+  )}
+</div>
 
               <p className="mt-4 max-w-3xl text-xl text-gray-400">
                 {description}
@@ -194,7 +233,15 @@ export default async function CreatorProfilePage({
                   )}
 
                   <h3 className="text-xl font-black">{item.name}</h3>
-                  <p className="mt-2 text-gray-400">{item.country}</p>
+                  <div className="mt-2 flex items-center gap-2 text-gray-400">
+  {item.country && countryFlag(item.country) && (
+    <img
+      src={countryFlag(item.country) || ""}
+      alt={item.country}
+      className="h-4 w-auto"
+    />
+  )}
+</div>
                   <p className="mt-3 font-bold text-[#67e1f9]">
                     {getSubscribers(item)} subscribers
                   </p>

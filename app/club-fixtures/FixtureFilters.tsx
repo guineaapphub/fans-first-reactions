@@ -97,6 +97,51 @@ const CLUB_ALIASES: Record<string, string[]> = {
   Tottenham: ["Tottenham Hotspur", "Spurs"],
   Barcelona: ["FC Barcelona"],
   "Real Madrid": ["Real Madrid CF"],
+
+  "Nottingham Forest": ["Nottm Forest"],
+  Leeds: ["Leeds United"],
+  Inter: ["Inter Milan"],
+  "Heart Of Midlothian": ["Hearts"],
+
+  Ipswich: ["Ipswich Town"],
+  Blackburn: ["Blackburn Rovers"],
+  Bolton: ["Bolton Wanderers"],
+  Coventry: ["Coventry City"],
+  "West Brom": ["West Bromwich Albion"],
+  Swansea: ["Swansea City"],
+  Derby: ["Derby County"],
+  QPR: ["Queens Park Rangers"],
+  Charlton: ["Charlton Athletic"],
+  Birmingham: ["Birmingham City"],
+  Cardiff: ["Cardiff City"],
+  Lincoln: ["Lincoln City"],
+  Preston: ["Preston North End"],
+  Huddersfield: ["Huddersfield Town"],
+  Peterborough: ["Peterborough United"],
+  Bradford: ["Bradford City"],
+  Wycombe: ["Wycombe Wanderers"],
+  Plymouth: ["Plymouth Argyle"],
+  Wigan: ["Wigan Athletic"],
+  Doncaster: ["Doncaster Rovers"],
+  Oldham: ["Oldham Athletic"],
+  Colchester: ["Colchester United"],
+  Northampton: ["Northampton Town"],
+  "Accrington ST": ["Accrington Stanley"],
+  Crewe: ["Crewe Alexandra"],
+  Grimsby: ["Grimsby Town"],
+  Rotherham: ["Rotherham United"],
+  Tranmere: ["Tranmere Rovers"],
+  Shrewsbury: ["Shrewsbury Town"],
+  York: ["York City"],
+
+  "VfB Stuttgart": ["Stuttgart"],
+  "FSV Mainz 05": ["Mainz"],
+  "1899 Hoffenheim": ["Hoffenheim"],
+
+  "Deportivo La Coruna": ["Deportivo"],
+  "Athletic Club": ["Athletic Bilbao"],
+  "Paris Saint Germain": ["PSG"],
+  "Bayern München": ["Bayern Munich"],
 };
 
 function normalizeClubName(name: string) {
@@ -462,14 +507,23 @@ export default function FixtureFilters({
                       )}
                     </div>
 
-                    {homeTotal > 4 && (
-                      <Link
-                        href={`/clubs/${clubSlug(fixture.homeTeam)}`}
-                        className="mt-4 inline-block text-sm font-black text-[#67e1f9] hover:underline"
-                      >
-                        View all {homeTotal} {fixture.homeTeam} creators →
-                      </Link>
-                    )}
+                    <div className="mt-4 flex flex-col gap-2">
+  {homeTotal > 4 && (
+    <Link
+      href={`/clubs/${clubSlug(fixture.homeTeam)}`}
+      className="text-sm font-black text-[#67e1f9] hover:underline"
+    >
+      View all {homeTotal} {fixture.homeTeam} creators →
+    </Link>
+  )}
+
+  <Link
+    href="/clubs/multi-club-other"
+    className="text-sm font-black text-[#67e1f9] hover:underline"
+  >
+    View Multi-Club / Other creators →
+  </Link>
+</div>
                   </div>
 
                   <div className="p-6">

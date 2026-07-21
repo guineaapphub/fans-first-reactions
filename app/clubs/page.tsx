@@ -9,6 +9,63 @@ function makeSlug(value: string | null) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
+function clubCountry(club: string, league?: string | null) {
+  const clubCountries: Record<string, string> = {
+    Barcelona: "Spain",
+    "AC Milan": "Italy",
+    "Man United": "England",
+    Arsenal: "England",
+    Rangers: "Scotland",
+  };
+
+  const leagueCountries: Record<string, string> = {
+    "Premier League": "England",
+    Championship: "England",
+    "League One": "England",
+    "League Two": "England",
+    "Scottish Premiership": "Scotland",
+    "La Liga": "Spain",
+    "Serie A": "Italy",
+    Bundesliga: "Germany",
+    "Ligue 1": "France",
+  };
+
+  return (
+    clubCountries[club.trim()] ||
+    leagueCountries[String(league || "").trim()] ||
+    null
+  );
+}
+function countryFlag(country?: string | null) {
+  if (!country) return null;
+
+  const flags: Record<string, string> = {
+    Australia: "au",
+    Belgium: "be",
+    Canada: "ca",
+    Colombia: "co",
+    England: "gb-eng",
+    France: "fr",
+    Germany: "de",
+    India: "in",
+    Indonesia: "id",
+    Ireland: "ie",
+    Italy: "it",
+    Jordan: "jo",
+    Latvia: "lv",
+    Nigeria: "ng",
+    Scotland: "gb-sct",
+    "South Korea": "kr",
+    Spain: "es",
+    Sweden: "se",
+    Uganda: "ug",
+    USA: "us",
+  };
+
+  const code = flags[country];
+
+  return code ? `/flags/${code}.svg` : null;
+}
 
 export default async function ClubsPage() {
   const { data: creators, error } = await supabase
@@ -38,7 +95,7 @@ export default async function ClubsPage() {
         name,
         slug,
         league: creator.league || "Football",
-        country: creator.country || "Unknown",
+        country: clubCountry(name, creator.league) || "Unknown",
         count: 0,
       });
     }
@@ -86,7 +143,15 @@ export default async function ClubsPage() {
 
               <h2 className="mt-4 text-3xl font-black">{club.name}</h2>
 
-              <p className="mt-3 text-gray-400">{club.country}</p>
+              <div className="mt-3">
+  {club.country && countryFlag(club.country) && (
+    <img
+      src={countryFlag(club.country) || ""}
+      alt={club.country}
+      className="h-4 w-auto"
+    />
+  )}
+</div>
 
               <p className="mt-5 text-xl font-black text-[#67e1f9]">
                 {club.count} creators
