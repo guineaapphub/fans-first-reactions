@@ -179,15 +179,16 @@ function getCreatorCount(creators: Creator[], club: string) {
 
 function clubSlug(club: string) {
   const slugMap: Record<string, string> = {
-    "Manchester United": "man-united",
-    "Manchester City": "man-city",
-    "Tottenham Hotspur": "tottenham",
-    "Newcastle United": "newcastle",
-    "Nottingham Forest": "nottm-forest",
-    "Wolverhampton Wanderers": "wolves",
-    "West Ham United": "west-ham",
-    "Brighton & Hove Albion": "brighton",
-  };
+  "Manchester United": "man-united",
+  "Manchester City": "man-city",
+  "Tottenham Hotspur": "tottenham",
+  "Newcastle United": "newcastle",
+  "Nottingham Forest": "nottm-forest",
+  "Wolverhampton Wanderers": "wolves",
+  "West Ham United": "west-ham",
+  "Brighton & Hove Albion": "brighton",
+  Leeds: "leeds-united",
+};
 
   if (slugMap[club]) return slugMap[club];
 
