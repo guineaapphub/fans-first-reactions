@@ -135,17 +135,23 @@ function clubCountry(club: string, league?: string | null) {
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/submit"
-                className="rounded-full bg-[#67e1f9] px-8 py-4 font-bold text-black"
+                className="rounded-full bg-[#67e1f9] px-8 py-4 font-bold text-black transition hover:bg-white"
               >
                 + Suggest Creator
               </Link>
 
               <Link
                 href="/creators"
-                className="rounded-full border border-[#67e1f9]/40 px-8 py-4 font-bold text-[#67e1f9]"
+                className="rounded-full border border-[#67e1f9]/40 px-8 py-4 font-bold text-[#67e1f9] transition hover:bg-[#67e1f9] hover:text-black"
               >
                 View All Creators
               </Link>
+              <Link
+                href="/favourites"
+                className="rounded-full border border-[#67e1f9]/40 px-8 py-4 font-bold text-[#67e1f9] transition hover:bg-[#67e1f9] hover:text-black"
+             >
+              ☆ View Favourites
+             </Link>
             </div>
           </div>
         </div>
@@ -229,7 +235,7 @@ function clubCountry(club: string, league?: string | null) {
 
           <Link
             href="/submit"
-            className="mt-6 inline-block rounded-full bg-black px-8 py-4 font-bold text-white md:mt-0"
+            className="mt-6 inline-block rounded-full bg-black px-8 py-4 font-bold text-white transition duration-300 hover:bg-white hover:text-black md:mt-0"
           >
             + Suggest a Creator
           </Link>

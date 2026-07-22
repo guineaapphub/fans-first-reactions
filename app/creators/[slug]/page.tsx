@@ -146,9 +146,9 @@ export default async function CreatorProfilePage({
                     href={youtubeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full bg-[#67e1f9] px-8 py-4 font-bold text-black"
+                    className="rounded-full bg-[#67e1f9] px-8 py-4 font-bold text-black transition duration-300 hover:bg-[#ff0000] hover:text-white"
                   >
-                    ▶ YouTube Channel
+                    ▶ Watch on YouTube 
                   </a>
                 ) : (
                   <button
@@ -265,7 +265,7 @@ export default async function CreatorProfilePage({
 
           <Link
             href="/submit"
-            className="mt-6 inline-block rounded-full bg-black px-8 py-4 font-bold text-white md:mt-0"
+            className="mt-6 inline-block rounded-full bg-black px-8 py-4 font-bold text-white transition duration-300 hover:bg-[#ffffff] hover:text-[#000000] md:mt-0"
           >
             + Suggest a Creator
           </Link>

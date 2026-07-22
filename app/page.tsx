@@ -314,7 +314,7 @@ export default function Home() {
           </div>
           <Link
             href="/submit"
-            className="rounded-full bg-black px-8 py-4 text-center font-bold text-[#67e1f9]"
+            className="rounded-full bg-black px-8 py-4 text-center font-bold text-[#67e1f9] transition duration-300 hover:bg-white hover:text-black"
           >
             + Suggest a Creator
           </Link>

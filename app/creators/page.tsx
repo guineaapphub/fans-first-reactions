@@ -262,22 +262,22 @@ export default function CreatorsPage() {
             <div className="flex flex-wrap gap-4">
               <button
                 onClick={() => setSortMode("subs")}
-                className={`rounded-full px-6 py-3 font-black ${
-                  sortMode === "subs"
-                    ? "bg-[#67e1f9] text-black"
-                    : "border border-white/20 text-white"
-                }`}
+                className={`rounded-full px-6 py-3 font-black transition ${
+                sortMode === "subs"
+                  ? "bg-[#67e1f9] text-black hover:bg-white"
+                  : "border border-white/20 text-white hover:border-[#67e1f9] hover:text-[#67e1f9]"
+          }`}
               >
                 📈 Most Subs
               </button>
 
               <button
                 onClick={() => setSortMode("az")}
-                className={`rounded-full px-6 py-3 font-black ${
-                  sortMode === "az"
-                    ? "bg-[#67e1f9] text-black"
-                    : "border border-white/20 text-white"
-                }`}
+                className={`rounded-full border px-6 py-3 font-black transition ${
+                sortMode === "az"
+                  ? "border-[#67e1f9] bg-[#67e1f9] text-black"
+                  : "border-white/20 text-white hover:border-[#67e1f9] hover:text-[#67e1f9]"
+            }`}
               >
                 A–Z
               </button>
