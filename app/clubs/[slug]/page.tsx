@@ -1,6 +1,8 @@
 import { supabase } from "@/lib/supabase";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+import { clubBadges } from "@/lib/club-badges";
 
 function makeSlug(value: string | null) {
   return (value || "")
@@ -116,9 +118,19 @@ function clubCountry(club: string, league?: string | null) {
               {league}
             </p>
 
-            <h1 className="mt-4 text-5xl font-black md:text-7xl">
-              {clubName}
-            </h1>
+            <h1 className="mt-4 flex items-center gap-4 text-5xl font-black md:text-7xl">
+             {clubBadges[clubName] && (
+              <Image
+                src={clubBadges[clubName]}
+                alt={`${clubName} badge`}
+                width={64}
+                height={64}
+                className="h-14 w-14 object-contain"
+              />
+    )}
+
+  <span>{clubName}</span>
+</h1>
 
             <div className="mt-5 flex items-center gap-2 text-2xl font-bold text-gray-300">
   <p>{creators.length} creators</p>
@@ -235,7 +247,7 @@ function clubCountry(club: string, league?: string | null) {
 
           <Link
             href="/submit"
-            className="mt-6 inline-block rounded-full bg-black px-8 py-4 font-bold text-white transition duration-300 hover:bg-white hover:text-black md:mt-0"
+              className="mt-6 inline-block rounded-full bg-black px-8 py-4 font-bold text-white transition duration-300 hover:bg-white hover:text-black md:mt-0"
           >
             + Suggest a Creator
           </Link>
