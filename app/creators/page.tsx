@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+import { clubBadges } from "@/lib/club-badges";
 import { supabase } from "@/lib/supabase";
 
 type Creator = {
@@ -83,6 +85,34 @@ function countryFlag(country?: string | null) {
   const code = flags[country];
 
   return code ? `/flags/${code}.svg` : null;
+}
+function clubCountry(club: string, league?: string | null) {
+  const clubCountries: Record<string, string> = {
+    Barcelona: "Spain",
+    "AC Milan": "Italy",
+    "Man United": "England",
+    Arsenal: "England",
+    Rangers: "Scotland",
+    "Real Madrid": "Spain",
+  };
+
+  const leagueCountries: Record<string, string> = {
+    "Premier League": "England",
+    Championship: "England",
+    "League One": "England",
+    "League Two": "England",
+    "Scottish Premiership": "Scotland",
+    "La Liga": "Spain",
+    "Serie A": "Italy",
+    Bundesliga: "Germany",
+    "Ligue 1": "France",
+  };
+
+  return (
+    clubCountries[club.trim()] ||
+    leagueCountries[String(league || "").trim()] ||
+    null
+  );
 }
 export default function CreatorsPage() {
   const router = useRouter();
@@ -309,23 +339,58 @@ export default function CreatorsPage() {
           <h2 className="mb-6 text-2xl font-black">Top Clubs</h2>
 
           <div className="mb-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {topClubs.map(([club, count]) => (
-              <button
-                key={club}
-                onClick={() => {
-                  setSelectedClub(club);
-                  setSelectedLeague("All Leagues");
-                }}
-                className={`rounded-3xl border p-6 text-left transition ${
-                  selectedClub === club
-                    ? "border-[#67e1f9] bg-[#67e1f9] text-black"
-                    : "border-[#122347] bg-[#081028] text-white hover:border-[#67e1f9]"
-                }`}
-              >
-                <h3 className="text-xl font-black">{club}</h3>
-                <p className="mt-2">{count} creators</p>
-              </button>
-            ))}
+            {topClubs.map(([club, count]) => {
+  const matchingCreator = fixedCreators.find(
+    (creator) => creator.club === club
+  );
+
+  const country = clubCountry(club, matchingCreator?.league);
+
+  return (
+    <button
+      key={club}
+      onClick={() => {
+        setSelectedClub(club);
+        setSelectedLeague("All Leagues");
+      }}
+      className={`rounded-3xl border p-6 text-left transition ${
+        selectedClub === club
+          ? "border-[#67e1f9] bg-[#67e1f9] text-black"
+          : "border-[#122347] bg-[#081028] text-white hover:border-[#67e1f9]"
+      }`}
+    >
+      <div className="flex items-center gap-2">
+        <h3 className="text-xl font-black">{club}</h3>
+
+        {clubBadges[club.trim()] && (
+          <Image
+            src={clubBadges[club.trim()]}
+            alt={`${club} badge`}
+            width={28}
+            height={28}
+            className="h-7 w-7 object-contain"
+          />
+        )}
+      </div>
+
+      {country && countryFlag(country) && (
+        <div className="mt-2 flex items-center gap-2">
+          <img
+            src={countryFlag(country) || ""}
+            alt={country}
+            className="h-4 w-auto"
+          />
+
+          <span className="text-xs font-bold uppercase tracking-[0.18em] text-gray-400">
+            {country}
+          </span>
+        </div>
+      )}
+
+      <p className="mt-3">{count} creators</p>
+    </button>
+  );
+})}
           </div>
 
           <h2 className="mb-6 text-2xl font-black">
@@ -375,15 +440,33 @@ export default function CreatorsPage() {
 
                     <h3 className="text-2xl font-black">{creator.name}</h3>
 
-<div className="mt-2 flex items-center gap-2 text-gray-400">
-  <p>{creator.club}</p>
+<div className="mt-2">
+  <div className="flex items-center gap-2 text-gray-400">
+    <p>{creator.club}</p>
+
+    {creator.club && clubBadges[creator.club.trim()] && (
+      <Image
+        src={clubBadges[creator.club.trim()]}
+        alt={`${creator.club} badge`}
+        width={24}
+        height={24}
+        className="h-5 w-5 object-contain"
+      />
+    )}
+  </div>
 
   {creator.country && countryFlag(creator.country) && (
-    <img
-      src={countryFlag(creator.country) || ""}
-      alt={creator.country}
-      className="h-4 w-auto"
-    />
+    <div className="mt-1 flex items-center gap-2">
+      <img
+        src={countryFlag(creator.country) || ""}
+        alt={creator.country}
+        className="h-4 w-auto"
+      />
+
+      <span className="text-xs font-bold uppercase tracking-[0.18em] text-gray-400">
+        {creator.country}
+      </span>
+    </div>
   )}
 </div>
 

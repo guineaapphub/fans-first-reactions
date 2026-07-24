@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import { clubBadges } from "@/lib/club-badges";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
@@ -91,6 +93,27 @@ function countryFlag(country?: string | null) {
 
   return code ? `/flags/${code}.svg` : null;
 }
+function clubCountry(club: string) {
+  const clubCountries: Record<string, string> = {
+    Arsenal: "England",
+    Chelsea: "England",
+    Liverpool: "England",
+    Tottenham: "England",
+    "Man City": "England",
+    "Man United": "England",
+    "Real Madrid": "Spain",
+    Barcelona: "Spain",
+    "Atletico Madrid": "Spain",
+    PSG: "France",
+    "AC Milan": "Italy",
+    Inter: "Italy",
+    Juventus: "Italy",
+    Rangers: "Scotland",
+    Celtic: "Scotland",
+  };
+
+  return clubCountries[club.trim()] || null;
+}
 export default function Home() {
   const [creators, setCreators] = useState<Creator[]>([]);
   const [fixtures, setFixtures] = useState<Fixture[]>([]);
@@ -150,24 +173,30 @@ export default function Home() {
   }, [creators]);
 
   const allClubs = useMemo(() => {
-    const map = new Map<string, { name: string; count: number }>();
+  const map = new Map<
+    string,
+    { name: string; country: string | null; count: number }
+  >();
 
-    creators.forEach((creator) => {
-      const name = creator.club?.trim();
-      if (!name) return;
+  creators.forEach((creator) => {
+    const name = creator.club?.trim();
+    if (!name) return;
 
-      const slug = makeSlug(name);
+    const slug = makeSlug(name);
 
-      if (!map.has(slug)) {
-        map.set(slug, { name, count: 0 });
-      }
+    if (!map.has(slug)) {
+      map.set(slug, {
+        name,
+        country: clubCountry(name),
+        count: 0,
+      });
+    }
 
-      map.get(slug)!.count += 1;
-    });
+    map.get(slug)!.count += 1;
+  });
 
-    return Array.from(map.values()).sort((a, b) => b.count - a.count);
-  }, [creators]);
-
+  return Array.from(map.values()).sort((a, b) => b.count - a.count);
+}, [creators]);
   const topClubs = allClubs.slice(0, 8);
 
   const leaguesCount = useMemo(() => {
@@ -280,15 +309,33 @@ export default function Home() {
               <div className="p-6">
                 <h3 className="text-2xl font-black">{creator.name}</h3>
 
-<div className="mt-1 flex items-center gap-2 text-gray-400">
-  <p>{creator.club}</p>
+<div className="mt-2">
+  <div className="flex items-center gap-2 text-gray-400">
+    <p>{creator.club}</p>
 
-  {creator.country && (
-    <img
-      src={countryFlag(creator.country) || ""}
-      alt={creator.country}
-      className="h-4 w-auto"
-    />
+    {creator.club && clubBadges[creator.club.trim()] && (
+      <Image
+        src={clubBadges[creator.club.trim()]}
+        alt={`${creator.club} badge`}
+        width={20}
+        height={20}
+        className="h-5 w-5 object-contain"
+      />
+    )}
+  </div>
+
+  {creator.country && countryFlag(creator.country) && (
+    <div className="mt-1 flex items-center gap-2">
+      <img
+        src={countryFlag(creator.country) || ""}
+        alt={creator.country}
+        className="h-4 w-auto"
+      />
+
+      <span className="text-xs font-bold uppercase tracking-[0.18em] text-gray-400">
+        {creator.country}
+      </span>
+    </div>
   )}
 </div>
                 <p className="mt-6 text-xl font-black text-[#67e1f9]">
@@ -336,8 +383,39 @@ export default function Home() {
               href={`/creators?club=${encodeURIComponent(club.name)}`}
               className="rounded-3xl border border-white/10 bg-[#0c1020] p-6 transition hover:-translate-y-1 hover:border-[#67e1f9]"
             >
-              <h3 className="mb-2 text-xl font-bold md:text-2xl">{club.name}</h3>
-              <p className="text-base text-gray-400 md:text-lg">{club.count} creators</p>
+             <div className="flex items-center gap-2">
+  <h3 className="text-xl font-bold md:text-2xl">
+    {club.name}
+  </h3>
+
+  {clubBadges[club.name.trim()] && (
+    <Image
+      src={clubBadges[club.name.trim()]}
+      alt={`${club.name} badge`}
+      width={28}
+      height={28}
+      className="h-7 w-7 object-contain"
+    />
+  )}
+</div>
+
+{club.country && countryFlag(club.country) && (
+  <div className="mt-2 flex items-center gap-2">
+    <img
+      src={countryFlag(club.country) || ""}
+      alt={club.country}
+      className="h-4 w-auto"
+    />
+
+    <span className="text-xs font-bold uppercase tracking-[0.18em] text-gray-400">
+      {club.country}
+    </span>
+  </div>
+)}
+
+<p className="mt-3 text-base text-gray-400 md:text-lg">
+  {club.count} creators
+</p>
             </Link>
           ))}
         </div>

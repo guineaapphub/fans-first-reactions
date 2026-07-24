@@ -1,3 +1,4 @@
+import { clubBadges } from "@/lib/club-badges";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
@@ -141,17 +142,33 @@ export default async function ClubsPage() {
                 {club.league}
               </p>
 
-              <h2 className="mt-4 text-3xl font-black">{club.name}</h2>
+              <div className="mt-4 flex items-center gap-3">
+               <h2 className="text-3xl font-black">{club.name}</h2>
 
-              <div className="mt-3">
-  {club.country && countryFlag(club.country) && (
-    <img
-      src={countryFlag(club.country) || ""}
-      alt={club.country}
-      className="h-4 w-auto"
-    />
-  )}
-</div>
+               {clubBadges[club.name.trim()] && (
+                 <img
+                   src={clubBadges[club.name.trim()]}
+                   alt={`${club.name} badge`}
+                   className="h-10 w-10 object-contain"
+                 />
+         )}
+             </div>
+
+              <div className="mt-3 flex items-center gap-2">
+              {club.country && countryFlag(club.country) && (
+              <>
+             <img
+              src={countryFlag(club.country) || ""}
+              alt={club.country}
+              className="h-4 w-auto"
+            />
+
+             <span className="text-sm font-bold uppercase tracking-[0.2em] text-gray-400">
+             {club.country}
+             </span>
+             </>
+           )}
+        </div>
 
               <p className="mt-5 text-xl font-black text-[#67e1f9]">
                 {club.count} creators

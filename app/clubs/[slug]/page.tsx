@@ -119,28 +119,34 @@ function clubCountry(club: string, league?: string | null) {
             </p>
 
             <h1 className="mt-4 flex items-center gap-4 text-5xl font-black md:text-7xl">
-             {clubBadges[clubName] && (
-              <Image
-                src={clubBadges[clubName]}
-                alt={`${clubName} badge`}
-                width={64}
-                height={64}
-                className="h-14 w-14 object-contain"
-              />
-    )}
-
   <span>{clubName}</span>
+
+  {clubBadges[clubName.trim()] && (
+    <Image
+      src={clubBadges[clubName.trim()]}
+      alt={`${clubName} badge`}
+      width={64}
+      height={64}
+      className="h-14 w-14 object-contain"
+    />
+  )}
 </h1>
 
-            <div className="mt-5 flex items-center gap-2 text-2xl font-bold text-gray-300">
+           <div className="mt-5 flex items-center gap-2 text-2xl font-bold text-gray-300">
   <p>{creators.length} creators</p>
 
-  {countryFlag(country) && (
-    <img
-      src={countryFlag(country) || ""}
-      alt={country || ""}
-      className="h-4 w-auto"
-    />
+  {country && countryFlag(country) && (
+    <>
+      <img
+        src={countryFlag(country) || ""}
+        alt={country}
+        className="h-4 w-auto"
+      />
+
+      <span className="text-sm font-bold uppercase tracking-[0.2em] text-gray-400">
+        {country}
+      </span>
+    </>
   )}
 </div>
 
@@ -205,15 +211,33 @@ function clubCountry(club: string, league?: string | null) {
 
                   <div>
                     <h3 className="text-2xl font-black">{name}</h3>
-                    <div className="flex items-center gap-2 text-gray-400">
-  <p>{creator.club}</p>
+                    <div className="mt-1">
+  <div className="flex items-center gap-2 text-gray-300">
+    <p>{creator.club}</p>
+
+    {creator.club && clubBadges[creator.club.trim()] && (
+      <Image
+        src={clubBadges[creator.club.trim()]}
+        alt={`${creator.club} badge`}
+        width={24}
+        height={24}
+        className="h-5 w-5 object-contain"
+      />
+    )}
+  </div>
 
   {creator.country && countryFlag(creator.country) && (
-    <img
-      src={countryFlag(creator.country) || ""}
-      alt={creator.country}
-      className="h-4 w-auto"
-    />
+    <div className="mt-1 flex items-center gap-2">
+      <img
+        src={countryFlag(creator.country) || ""}
+        alt={creator.country}
+        className="h-4 w-auto"
+      />
+
+      <span className="text-xs font-bold uppercase tracking-[0.18em] text-gray-400">
+        {creator.country}
+      </span>
+    </div>
   )}
 </div>
                   </div>
