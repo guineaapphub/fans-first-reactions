@@ -254,7 +254,7 @@ export default function CreatorsPage() {
 
   return (
     <main className="min-h-screen bg-[#020817] text-white">
-      <section className="border-b border-white/10 px-8 py-16">
+      <section className="border-b border-white/10 bg-[#06080a] px-8 py-16">
         <p className="mb-4 text-sm font-black uppercase tracking-[0.35em] text-[#67e1f9]">
           Database
         </p>
@@ -266,8 +266,8 @@ export default function CreatorsPage() {
         </p>
       </section>
 
-      <section className="grid gap-8 px-8 py-10 lg:grid-cols-[280px_1fr]">
-        <aside className="rounded-3xl border border-white/10 bg-[#081028] p-4">
+      <section className="grid gap-8 bg-black px-8 py-10 lg:grid-cols-[280px_1fr]">
+     <aside className="rounded-3xl border border-white/10 bg-[#0b1020] p-4">
           {leagues.map((league) => (
             <button
               key={league}
@@ -402,7 +402,7 @@ export default function CreatorsPage() {
           </h2>
 
           {filteredCreators.length === 0 ? (
-            <div className="rounded-3xl border border-white/10 bg-[#081028] p-8">
+           <div className="rounded-3xl border border-white/10 bg-[#0b1020] p-8">
               <h3 className="text-2xl font-black">No creators found yet</h3>
               <p className="mt-2 text-gray-400">
                 This league or club exists, but there are no creators saved for it in Supabase yet.

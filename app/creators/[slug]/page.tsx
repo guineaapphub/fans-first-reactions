@@ -2,6 +2,8 @@ import { supabase } from "@/lib/supabase";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import FavouriteButton from "./FavouriteButton";
+import Image from "next/image";
+import { clubBadges } from "@/lib/club-badges";
 
 function makeSlug(value: string | null) {
   return (value || "")
@@ -69,11 +71,12 @@ export default async function CreatorProfilePage({
   }
 
   const { data: moreCreators } = await supabase
-    .from("creators")
-    .select("*")
-    .eq("club", creator.club)
-    .neq("slug", slug)
-    .limit(4);
+  .from("creators")
+  .select("*")
+  .eq("club", creator.club)
+  .neq("slug", slug)
+  .order("subscriber_count", { ascending: false })
+  .limit(3);
 
   const sortedMoreCreators = [...(moreCreators || [])].sort(
     (a, b) => numberValue(getSubscribers(b)) - numberValue(getSubscribers(a))
@@ -124,15 +127,33 @@ export default async function CreatorProfilePage({
 
               <h1 className="mt-4 text-5xl font-black md:text-7xl">{name}</h1>
 
-              <div className="mt-5 flex items-center gap-2 text-2xl font-bold text-gray-300">
-  <p>{clubName}</p>
+              <div className="mt-5">
+  <div className="flex items-center gap-3 text-2xl font-bold text-gray-300">
+    <p>{clubName}</p>
+
+    {clubBadges[clubName.trim()] && (
+      <Image
+        src={clubBadges[clubName.trim()]}
+        alt={`${clubName} badge`}
+        width={32}
+        height={32}
+        className="h-8 w-8 object-contain"
+      />
+    )}
+  </div>
 
   {creator.country && countryFlag(creator.country) && (
-    <img
-      src={countryFlag(creator.country) || ""}
-      alt={creator.country}
-      className="h-4 w-auto"
-    />
+    <div className="mt-2 flex items-center gap-2">
+      <img
+        src={countryFlag(creator.country) || ""}
+        alt={creator.country}
+        className="h-4 w-auto"
+      />
+
+      <span className="text-sm font-bold uppercase tracking-[0.18em] text-gray-400">
+        {creator.country}
+      </span>
+    </div>
   )}
 </div>
 
@@ -212,40 +233,72 @@ export default async function CreatorProfilePage({
               </Link>
             </div>
 
-            <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
               {sortedMoreCreators.map((item) => (
                 <Link
-                  key={item.id}
-                  href={`/creators/${item.slug}`}
-                  className="rounded-2xl border border-white/10 bg-black p-5 hover:border-[#67e1f9]"
-                >
-                  {item.avatar_url ? (
-                    <img
-                      src={item.avatar_url}
-                      alt={item.name}
-                      referrerPolicy="no-referrer"
-                      className="mb-4 h-16 w-16 rounded-full object-cover"
-                    />
-                  ) : (
-                    <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#67e1f9] text-xl font-black text-black">
-                      {(item.name || "?").charAt(0)}
-                    </div>
-                  )}
+  key={item.id}
+  href={`/creators/${item.slug}`}
+  className="rounded-[28px] border border-white/10 bg-black p-6 transition hover:border-[#67e1f9]"
+>
+  <div className="flex items-center gap-4">
+    {item.avatar_url ? (
+      <img
+        src={item.avatar_url}
+        alt={item.name || "Creator"}
+        referrerPolicy="no-referrer"
+        className="h-16 w-16 rounded-full object-cover"
+      />
+    ) : (
+      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#67e1f9] text-2xl font-black text-black">
+        {(item.name || "?").charAt(0)}
+      </div>
+    )}
 
-                  <h3 className="text-xl font-black">{item.name}</h3>
-                  <div className="mt-2 flex items-center gap-2 text-gray-400">
-  {item.country && countryFlag(item.country) && (
-    <img
-      src={countryFlag(item.country) || ""}
-      alt={item.country}
-      className="h-4 w-auto"
-    />
-  )}
-</div>
-                  <p className="mt-3 font-bold text-[#67e1f9]">
-                    {getSubscribers(item)} subscribers
-                  </p>
-                </Link>
+    <div>
+      <h3 className="text-2xl font-black">{item.name}</h3>
+
+      <div className="mt-1">
+        <div className="flex items-center gap-2 text-gray-300">
+          <p>{item.club}</p>
+
+          {item.club && clubBadges[item.club.trim()] && (
+            <Image
+              src={clubBadges[item.club.trim()]}
+              alt={`${item.club} badge`}
+              width={24}
+              height={24}
+              className="h-5 w-5 object-contain"
+            />
+          )}
+        </div>
+
+        {item.country && countryFlag(item.country) && (
+          <div className="mt-1 flex items-center gap-2">
+            <img
+              src={countryFlag(item.country) || ""}
+              alt={item.country}
+              className="h-4 w-auto"
+            />
+
+            <span className="text-xs font-bold uppercase tracking-[0.18em] text-gray-400">
+              {item.country}
+            </span>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <div className="mt-6 border-t border-white/10 pt-5">
+    <p className="text-xl font-black text-[#67e1f9]">
+      {getSubscribers(item)} subscribers
+    </p>
+
+    <p className="mt-2 text-gray-400">
+      Uploads: {item.upload_frequency || "Not listed"}
+    </p>
+  </div>
+</Link>
               ))}
             </div>
           </div>
