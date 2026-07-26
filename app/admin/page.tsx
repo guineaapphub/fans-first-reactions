@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
@@ -180,12 +181,15 @@ export default function AdminPage() {
           Review creator submissions. Approving here adds the creator to the live website.
         </p>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          <AdminCard title="Pending Approvals" text={`${submissions.length} waiting`} />
-          <AdminCard title="Creators" text="Live creators are managed in Supabase." />
-          <AdminCard title="Users" text="User roles are managed in profiles." />
-        </div>
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+  <AdminCard title="Pending Approvals" text={`${submissions.length} waiting`} />
+  <AdminCard title="Creators" text="Live creators are managed in Supabase." />
+  <AdminCard title="Users" text="User roles are managed in profiles." />
 
+  <Link href="/admin/badges-qa">
+    <AdminCard title="Badge QA" text="Check every club badge mapping." />
+  </Link>
+</div>
         <section className="mt-12 rounded-[28px] border border-[#67e1f9]/30 bg-white/5 p-6">
           <h2 className="text-2xl font-black">Pending Creator Approvals</h2>
 
