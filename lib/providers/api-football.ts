@@ -32,8 +32,15 @@ const LEAGUES = [
   { id: 61, name: "Ligue 1", shortName: "LIG1" },
   { id: 2, name: "Champions League", shortName: "UCL" },
   { id: 3, name: "Europa League", shortName: "UEL" },
+  {
+    id: 848,
+    name: "UEFA Europa Conference League",
+    shortName: "UECL",
+  },
+  { id: 45, name: "FA Cup", shortName: "FAC" },
+  { id: 48, name: "League Cup", shortName: "LC" },
 ] as const;
-
+  
 type League = (typeof LEAGUES)[number];
 
 type ApiFootballFixture = {
@@ -62,6 +69,9 @@ type ApiFootballResponse = {
   errors?: unknown;
   results?: number;
   response?: ApiFootballFixture[];
+};
+const localLeagueLogos: Record<number, string> = {
+  848: "/league-logos/europa-conference-league.png",
 };
 
 function wait(milliseconds: number): Promise<void> {
@@ -154,7 +164,10 @@ async function fetchLeagueFixtures(league: League): Promise<Fixture[]> {
     id: String(item.fixture.id),
     leagueId: item.league.id,
     league: item.league.name,
-    leagueLogo: item.league.logo ?? "",
+    leagueLogo:
+    localLeagueLogos[item.league.id] ??
+    item.league.logo ??
+    "",
     homeTeam: item.teams.home.name,
     awayTeam: item.teams.away.name,
     homeLogo: item.teams.home.logo ?? "",
@@ -258,7 +271,7 @@ async function buildFixtureSnapshot(): Promise<Fixture[]> {
  */
 const getCachedFixtureSnapshot = unstable_cache(
   async () => buildFixtureSnapshot(),
-  ["fans-first-reactions-fixture-snapshot-v1"],
+  ["fans-first-reactions-fixture-snapshot-v4"],
   {
     revalidate: CACHE_SECONDS,
   }

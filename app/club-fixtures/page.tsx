@@ -41,8 +41,8 @@ export default async function ClubFixturesPage() {
         </h1>
 
         <p className="mt-6 max-w-3xl text-lg text-zinc-400">
-          Find upcoming football matches and discover which fan creators are
-          covering each fixture.
+          Find upcoming football matches and discover which fan creators are covering each fixture. 
+          Search by club or competition.
         </p>
       </section>
 

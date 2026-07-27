@@ -338,7 +338,7 @@ export default function FixtureFilters({
               setSearchQuery(event.target.value);
               setShowSuggestions(true);
             }}
-            placeholder="Search clubs..."
+            placeholder="Search clubs or competitions..."
             className="w-full rounded-full border-4 border-[#67e1f9] bg-white px-8 py-6 pr-16 text-xl font-medium text-black outline-none placeholder:text-zinc-500"
           />
 
