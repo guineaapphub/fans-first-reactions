@@ -260,15 +260,33 @@ export default function Home() {
               >
                <h3 className="text-xl font-black">{creator.name}</h3>
 
-<div className="mt-2 flex items-center gap-2 text-zinc-400">
-  <p>{creator.club}</p>
+<div className="mt-2">
+  <div className="flex items-center gap-2 text-zinc-400">
+    <p>{creator.club}</p>
+
+    {creator.club && clubBadges[creator.club.trim()] && (
+      <Image
+        src={clubBadges[creator.club.trim()]}
+        alt={`${creator.club} badge`}
+        width={20}
+        height={20}
+        className="h-5 w-5 object-contain"
+      />
+    )}
+  </div>
 
   {creator.country && countryFlag(creator.country) && (
-    <img
-      src={countryFlag(creator.country) || ""}
-      alt={creator.country}
-      className="h-4 w-auto"
-    />
+    <div className="mt-1 flex items-center gap-2">
+      <img
+        src={countryFlag(creator.country) || ""}
+        alt={creator.country}
+        className="h-4 w-auto"
+      />
+
+      <span className="text-xs font-bold uppercase tracking-[0.18em] text-zinc-400">
+        {creator.country}
+      </span>
+    </div>
   )}
 </div>
               </Link>

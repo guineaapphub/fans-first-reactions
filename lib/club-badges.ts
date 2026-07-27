@@ -59,7 +59,6 @@ export const clubBadges: Record<string, string> = {
   "Southampton": "/club-badges/Southampton.png",
   "Stoke": "/club-badges/Stoke City.png",
   "Stoke City": "/club-badges/Stoke City.png",
-  "Sunderland": "/club-badges/Sunderland.png",
   "Swansea": "/club-badges/Swansea City.png",
   "Swansea City": "/club-badges/Swansea City.png",
   "Watford": "/club-badges/Watford.png",
