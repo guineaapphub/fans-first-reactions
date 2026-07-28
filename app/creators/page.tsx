@@ -266,7 +266,7 @@ export default function CreatorsPage() {
         </p>
       </section>
 
-      <section className="grid gap-8 bg-black px-8 py-10 lg:grid-cols-[280px_1fr]">
+      <section className="grid gap-8 bg-black px-4 py-10 sm:px-6 lg:grid-cols-[280px_1fr] lg:px-8">
      <aside className="rounded-3xl border border-white/10 bg-[#0b1020] p-4">
           {leagues.map((league) => (
             <button

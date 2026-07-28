@@ -209,8 +209,8 @@ function clubCountry(club: string, league?: string | null) {
                     </div>
                   )}
 
-                  <div>
-                    <h3 className="text-2xl font-black">{name}</h3>
+                  <div className="min-w-0">
+  <h3 className="break-words text-2xl font-black">{name}</h3>
                     <div className="mt-1">
   <div className="flex items-center gap-2 text-gray-300">
     <p>{creator.club}</p>
