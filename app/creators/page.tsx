@@ -267,7 +267,7 @@ export default function CreatorsPage() {
       </section>
 
       <section className="grid gap-8 bg-black px-4 py-10 sm:px-6 lg:grid-cols-[280px_1fr] lg:px-8">
-     <aside className="rounded-3xl border border-white/10 bg-[#0b1020] p-4">
+     <aside className="mx-auto w-full max-w-[360px] rounded-3xl border border-white/10 bg-[#0b1020] p-4 lg:max-w-none">
           {leagues.map((league) => (
             <button
               key={league}
@@ -287,8 +287,8 @@ export default function CreatorsPage() {
           ))}
         </aside>
 
-        <div>
-          <div className="mb-8 rounded-3xl border border-white/10 bg-[#081028] p-5">
+<div className="mx-auto w-full max-w-[360px] lg:max-w-none">
+  <div className="mb-8 rounded-3xl border border-white/10 bg-[#081028] p-5">
             <div className="flex flex-wrap gap-4">
               <button
                 onClick={() => setSortMode("subs")}
@@ -409,7 +409,7 @@ export default function CreatorsPage() {
               </p>
             </div>
           ) : (
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <div className="mx-auto grid w-full max-w-[360px] gap-6 md:max-w-none md:grid-cols-2 xl:grid-cols-3">
               {filteredCreators.map((creator) => {
                 const hasAvatar = creator.avatar_url && !brokenImages[creator.id];
 
@@ -417,7 +417,7 @@ export default function CreatorsPage() {
                   <Link
                     key={creator.id}
                     href={`/creators/${creator.slug}`}
-                    className="rounded-3xl border border-[#122347] bg-[#081028] p-6 text-white no-underline transition hover:border-[#67e1f9]"
+                    className="mx-auto w-full max-w-[340px] min-w-0 rounded-3xl border border-[#122347] bg-[#081028] p-6 text-white no-underline transition hover:border-[#67e1f9] md:max-w-none"
                   >
                     {hasAvatar ? (
                       <img
