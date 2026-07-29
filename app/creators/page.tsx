@@ -22,7 +22,20 @@ type Creator = {
 };
 
 function numberValue(value: string | null | undefined) {
-  return Number(String(value || "0").replace(/[^0-9]/g, "")) || 0;
+  const cleaned = String(value || "0")
+    .trim()
+    .toUpperCase()
+    .replace(/,/g, "");
+
+  const number = Number.parseFloat(cleaned.replace(/[^0-9.]/g, ""));
+
+  if (!Number.isFinite(number)) return 0;
+
+  if (cleaned.includes("B")) return number * 1_000_000_000;
+  if (cleaned.includes("M")) return number * 1_000_000;
+  if (cleaned.includes("K")) return number * 1_000;
+
+  return number;
 }
 
 function cleanText(value: string | null | undefined, fallback = "Unknown") {
@@ -117,15 +130,17 @@ function clubCountry(club: string, league?: string | null) {
 export default function CreatorsPage() {
   const router = useRouter();
 
-  const [creators, setCreators] = useState<Creator[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedLeague, setSelectedLeague] = useState("All Leagues");
-  const [selectedClub, setSelectedClub] = useState("All Clubs");
-  const [sortMode, setSortMode] = useState<"subs" | "az">("subs");
-  const [showSignupNotice, setShowSignupNotice] = useState(false);
-  const [isSignedIn, setIsSignedIn] = useState(false);
-  const [brokenImages, setBrokenImages] = useState<Record<string, boolean>>({});
-
+ const [creators, setCreators] = useState<Creator[]>([]);
+const [loading, setLoading] = useState(true);
+const [selectedLeague, setSelectedLeague] = useState("All Leagues");
+const [selectedClub, setSelectedClub] = useState("All Clubs");
+const [sortMode, setSortMode] = useState<
+  "subs" | "subs-asc" | "az" | "za"
+>("subs");
+const [searchQuery, setSearchQuery] = useState("");
+const [showSignupNotice, setShowSignupNotice] = useState(false);
+const [isSignedIn, setIsSignedIn] = useState(false);
+const [brokenImages, setBrokenImages] = useState<Record<string, boolean>>({});
   useEffect(() => {
     fetchCreators();
   }, []);
@@ -228,21 +243,52 @@ export default function CreatorsPage() {
     }
 
     if (selectedClub !== "All Clubs") {
-      list = list.filter(
-        (creator) => cleanText(creator.club, "Unknown") === selectedClub
-      );
-    }
+  list = list.filter(
+    (creator) => cleanText(creator.club, "Unknown") === selectedClub
+  );
+}
 
-    if (sortMode === "az") {
-      list.sort((a, b) => String(a.name).localeCompare(String(b.name)));
-    } else {
-      list.sort(
-        (a, b) => numberValue(getSubscribers(b)) - numberValue(getSubscribers(a))
-      );
-    }
+const query = searchQuery.trim().toLowerCase();
+
+if (query) {
+  list = list.filter((creator) => {
+    const name = cleanText(creator.name, "").toLowerCase();
+    const club = cleanText(creator.club, "").toLowerCase();
+
+    return name.includes(query) || club.includes(query);
+  });
+}
+
+if (sortMode === "az" || sortMode === "za") {
+  list.sort((a, b) => {
+    const nameA = String(a.name);
+    const nameB = String(b.name);
+
+    const startsWithLetterA = /^[A-Za-z]/.test(nameA);
+    const startsWithLetterB = /^[A-Za-z]/.test(nameB);
+
+    if (startsWithLetterA && !startsWithLetterB) return -1;
+    if (!startsWithLetterA && startsWithLetterB) return 1;
+
+    const comparison = nameA.localeCompare(nameB, "en", {
+      sensitivity: "base",
+      numeric: true,
+    });
+
+    return sortMode === "za" ? -comparison : comparison;
+  });
+} else if (sortMode === "subs-asc") {
+  list.sort(
+    (a, b) => numberValue(getSubscribers(a)) - numberValue(getSubscribers(b))
+  );
+} else {
+  list.sort(
+    (a, b) => numberValue(getSubscribers(b)) - numberValue(getSubscribers(a))
+  );
+}
 
     return list;
-  }, [fixedCreators, selectedLeague, selectedClub, sortMode]);
+ }, [fixedCreators, selectedLeague, selectedClub, sortMode, searchQuery]);
 
   if (loading) {
     return (
@@ -289,28 +335,49 @@ export default function CreatorsPage() {
 
 <div className="mx-auto w-full max-w-[360px] lg:max-w-none">
   <div className="mb-8 rounded-3xl border border-white/10 bg-[#081028] p-5">
-            <div className="flex flex-wrap gap-4">
+  <div className="mb-5">
+    <label htmlFor="creator-search" className="sr-only">
+      Search creators
+    </label>
+
+    <input
+      id="creator-search"
+      type="search"
+      value={searchQuery}
+      onChange={(event) => setSearchQuery(event.target.value)}
+      placeholder="Search creators by name or club..."
+      className="w-full rounded-2xl border border-white/15 bg-transparent px-5 py-4 text-white outline-none transition placeholder:text-gray-500 focus:border-[#67e1f9]"
+    />
+  </div>
+
+  <div className="flex flex-wrap gap-4">
               <button
-                onClick={() => setSortMode("subs")}
-                className={`rounded-full px-6 py-3 font-black transition ${
-                sortMode === "subs"
-                  ? "bg-[#67e1f9] text-black hover:bg-white"
-                  : "border border-white/20 text-white hover:border-[#67e1f9] hover:text-[#67e1f9]"
-          }`}
-              >
-                📈 Most Subs
-              </button>
+  onClick={() =>
+    setSortMode((current) =>
+      current === "subs" ? "subs-asc" : "subs"
+    )
+  }
+  className={`rounded-full px-6 py-3 font-black transition ${
+    sortMode === "subs" || sortMode === "subs-asc"
+      ? "bg-[#67e1f9] text-black hover:bg-white"
+      : "border border-white/20 text-white hover:border-[#67e1f9] hover:text-[#67e1f9]"
+  }`}
+>
+  {sortMode === "subs-asc" ? "📉 Least Subs" : "📈 Most Subs"}
+</button>
 
               <button
-                onClick={() => setSortMode("az")}
-                className={`rounded-full border px-6 py-3 font-black transition ${
-                sortMode === "az"
-                  ? "border-[#67e1f9] bg-[#67e1f9] text-black"
-                  : "border-white/20 text-white hover:border-[#67e1f9] hover:text-[#67e1f9]"
-            }`}
-              >
-                A–Z
-              </button>
+  onClick={() =>
+    setSortMode((current) => (current === "az" ? "za" : "az"))
+  }
+  className={`rounded-full border px-6 py-3 font-black transition ${
+    sortMode === "az" || sortMode === "za"
+      ? "border-[#67e1f9] bg-[#67e1f9] text-black"
+      : "border-white/20 text-white hover:border-[#67e1f9] hover:text-[#67e1f9]"
+  }`}
+>
+  {sortMode === "za" ? "⬆️ Z→A" : "⬇️ A→Z"}
+</button>
 
               <button
                 onClick={() => {

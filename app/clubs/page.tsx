@@ -1,6 +1,7 @@
 import { clubBadges } from "@/lib/club-badges";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
+import ClubSearch from "./ClubSearch";
 
 function makeSlug(value: string | null) {
   return (value || "")
@@ -68,7 +69,102 @@ function countryFlag(country?: string | null) {
   return code ? `/flags/${code}.svg` : null;
 }
 
-export default async function ClubsPage() {
+function normaliseClubSearch(value: string) {
+  const query = value.trim().toLowerCase();
+
+  const aliases: Record<string, string[]> = {
+    spfl: [
+      "scottish premiership",
+      "scottish championship",
+      "scottish league",
+      "scotland",
+    ],
+    "scottish professional football league": [
+      "scottish premiership",
+      "scottish championship",
+      "scottish league",
+      "scotland",
+    ],
+    "scottish league": [
+      "scottish premiership",
+      "scottish championship",
+      "scotland",
+    ],
+
+    epl: ["premier league", "english premier league", "england"],
+    "english premier league": ["premier league", "england"],
+
+    efl: [
+      "championship",
+      "league one",
+      "league two",
+      "english football league",
+      "england",
+    ],
+    "english football league": [
+      "championship",
+      "league one",
+      "league two",
+      "england",
+    ],
+    "english league": [
+      "premier league",
+      "championship",
+      "league one",
+      "league two",
+      "england",
+    ],
+
+    "efl championship": ["championship", "england"],
+    "efl league one": ["league one", "england"],
+    "efl league two": ["league two", "england"],
+
+    bundesliga: ["bundesliga", "fußball-bundesliga", "german league", "germany"],
+    "fußball-bundesliga": ["bundesliga", "german league", "germany"],
+    "german league": ["bundesliga", "germany"],
+
+    "serie a": [
+      "serie a",
+      "serie a enilive",
+      "scudetto",
+      "italian league",
+      "italy",
+    ],
+    "serie a enilive": ["serie a", "italian league", "italy"],
+    scudetto: ["serie a", "italian league", "italy"],
+    "italian league": ["serie a", "italy"],
+
+    "la liga": [
+      "la liga",
+      "primera división",
+      "primera division",
+      "spanish league",
+      "spain",
+    ],
+    "primera división": ["la liga", "spanish league", "spain"],
+    "primera division": ["la liga", "spanish league", "spain"],
+    "spanish league": ["la liga", "spain"],
+
+    "ligue 1": [
+      "ligue 1",
+      "division 1",
+      "le championnat",
+      "french league",
+      "france",
+    ],
+    "division 1": ["ligue 1", "french league", "france"],
+    "le championnat": ["ligue 1", "french league", "france"],
+    "french league": ["ligue 1", "france"],
+  };
+
+  return aliases[query] || [query];
+}
+export default async function ClubsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ search?: string }>;
+}) {
+  const { search = "" } = await searchParams;
   const { data: creators, error } = await supabase
     .from("creators")
     .select("club, league, country");
@@ -105,8 +201,26 @@ export default async function ClubsPage() {
   });
 
   const clubs = Array.from(clubMap.values()).sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
+  a.name.localeCompare(b.name)
+);
+
+const searchTerms = normaliseClubSearch(search);
+
+const filteredClubs = search.trim()
+  ? clubs.filter((club) => {
+      const searchableText = [
+        club.name,
+        club.league,
+        club.country,
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return searchTerms.some((term) =>
+        searchableText.includes(term.toLowerCase())
+      );
+    })
+  : clubs;
 
   return (
     <main className="min-h-screen bg-black text-white">
@@ -127,12 +241,16 @@ export default async function ClubsPage() {
           <p className="mt-4 text-2xl font-bold text-[#67e1f9]">
             {clubs.length} clubs indexed
           </p>
-        </div>
+                </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-14 md:px-12">
+     <section className="mx-auto max-w-7xl px-6 pt-10 md:px-12">
+  <ClubSearch initialSearch={search} />
+</section>
+
+      <section className="mx-auto max-w-7xl px-6 py-10 md:px-12">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {clubs.map((club) => (
+          {filteredClubs.map((club) => (
             <Link
               key={club.slug}
               href={`/clubs/${club.slug}`}
