@@ -480,11 +480,12 @@ if (sortMode === "az" || sortMode === "za") {
               {filteredCreators.map((creator) => {
                 const hasAvatar = creator.avatar_url && !brokenImages[creator.id];
 
+                
                 return (
                   <Link
                     key={creator.id}
                     href={`/creators/${creator.slug}`}
-                    className="mx-auto w-full max-w-[340px] min-w-0 rounded-3xl border border-[#122347] bg-[#081028] p-6 text-white no-underline transition hover:border-[#67e1f9] md:max-w-none"
+                    className="mx-auto w-full max-w-[340px] min-w-0 overflow-hidden rounded-3xl border border-[#122347] bg-[#081028] p-6 text-white no-underline transition hover:border-[#67e1f9] md:max-w-none"
                   >
                     {hasAvatar ? (
                       <img
@@ -505,7 +506,11 @@ if (sortMode === "az" || sortMode === "za") {
                       </div>
                     )}
 
-                    <h3 className="text-2xl font-black">{creator.name}</h3>
+                   <h3
+   className="mt-1 w-full min-w-0 max-w-full text-xl font-black leading-tight md:text-2xl">
+  {creator.name}
+
+</h3>
 
 <div className="mt-2">
   <div className="flex items-center gap-2 text-gray-400">
