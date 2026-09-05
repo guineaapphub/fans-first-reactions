@@ -153,6 +153,24 @@ const buildBrandTools = [
 
 const affiliatePartners = [
   {
+  id: "p1-travel",
+  title: "P1 TRAVEL",
+  category: "Official Football Tickets",
+  text: "Heading to a match? Find official football tickets and sports travel packages with P1 Travel.",
+  button: "Visit Website",
+  link: "https://p1travel.prf.hn/click/camref:1101l5R6nn/[p_id:1100l643900]/destination:https%3A%2F%2Fwww.p1travel.com%2Fen-GB",
+  logo: "/images/logos/p1-travel-logo.png",
+  },
+  {
+  id: "retro-sports-factory",
+  title: "RETRO SPORTS FACTORY",
+  category: "Retro Football Gifts",
+  text: "Personalised retro football gifts inspired by classic football kit patterns from the 1970s, 80s, 90s, and 2000s.",
+  button: "Visit Website",
+  link: "https://www.retrosportsfactory.com/FANSFIRST20",
+  logo: "/images/logos/retro-sports-factory-logo.png",
+ },
+  {
     id: "okayjersey",
     title: "OKAYJERSEY",
     category: "Football Shirts",
@@ -172,7 +190,7 @@ const affiliatePartners = [
   },
   {
     id: "neon-signs",
-    title: "Neon Signs UK",
+    title: "NEON SIGNS UK",
     category: "LED Neon Signs",
     text: "Custom neon signs to make your streaming background look more professional.",
     button: "Visit Website",
@@ -181,7 +199,7 @@ const affiliatePartners = [
   },
   {
     id: "3pm2ft",
-    title: "3PM2FT Football",
+    title: "3PM2FT FOOTBALL",
     category: "Football Card Game",
     text: "Vidiprinter football card game for football fans, creators, and watchalong communities.",
     button: "Visit Website",
@@ -190,7 +208,7 @@ const affiliatePartners = [
   },
   {
     id: "cardsplug",
-    title: "CardsPlug",
+    title: "CARDSPLUG",
     category: "Real-Life Football Cards",
     text: "CardsPlug creates personalised physical replica football cards inspired by popular football video games. Customise cards with photos, names, club crests, and ratings.",
     button: "Visit Website",
@@ -199,7 +217,7 @@ const affiliatePartners = [
   },
 {
   id: "3retro",
-  title: "3Retro",
+  title: "3RETRO",
   category: "Retro Football Shirts",
   text: "3Retro specialises in classic and vintage football shirts from clubs and national teams around the world. It's the perfect place for football fans looking to own iconic kits from past eras.",
   button: "Visit Website",
@@ -216,7 +234,7 @@ const affiliatePartners = [
 },
 {
   id: "allstarsignings",
-  title: "All Star Signings",
+  title: "ALL STAR SIGNINGS",
   category: "Sports Memorabilia",
   text: "All Star Signings offers authentic signed football memorabilia from legendary players and clubs, making it the perfect destination for collectors and passionate football fans.",
   button: "Visit Website",
@@ -233,8 +251,8 @@ const affiliatePartners = [
 },
 {
   id: "playpredictwin",
-  title: "Play Predict Win",
-  category: "Football Predictor Game",
+  title: "PLAY PREDICT WIN",
+  category: "PREDICTOR GAME",
   text: "Play Predict Win is a free football prediction game where you can call every scoreline, compete in private leagues with friends, climb the leaderboard, and prove your football knowledge throughout the season.",
   button: "Visit Website",
   features: [
@@ -250,7 +268,7 @@ const affiliatePartners = [
 },
 ];
 
-const emptyAffiliateBoxes = Array.from({ length: 4 }, (_, index) => ({
+const emptyAffiliateBoxes = Array.from({ length: 2 }, (_, index) => ({
   id: `empty-affiliate-${index + 1}`,
   title: "Want to Partner With Us?",
   category: "Featured Partner",

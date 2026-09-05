@@ -243,33 +243,32 @@ function CreatorChip({
 function AffiliateBox() {
   return (
     <a
-      href={FOOTBALL_PREDICTOR_URL}
+      href="https://p1travel.prf.hn/click/camref:1101l5R6nn/[p_id:1100l643900]/destination:https%3A%2F%2Fwww.p1travel.com%2Fen-GB"
       target="_blank"
       rel="noopener noreferrer sponsored"
       className="mt-6 flex max-w-sm items-center gap-4 rounded-2xl border border-[#67e1f9]/40 bg-black/40 p-4 transition hover:border-[#67e1f9] hover:bg-[#67e1f9]/10 md:mt-0"
     >
       <img
-        src="/football-predictor-league.png"
-        alt="The Football Predictor League"
+        src="/images/logos/p1-travel-logo.png"
+        alt="P1 Travel"
         className="h-20 w-20 rounded-xl object-contain"
       />
 
       <div>
         <p className="text-xs font-black uppercase tracking-[0.2em] text-[#67e1f9]">
-          The Football Predictor League
+          P1 Travel
         </p>
 
         <p className="mt-1 text-sm font-black text-white">
-          Play. Predict. Win.
+          Going to the game?
         </p>
 
         <p className="mt-1 text-xs text-zinc-400">
-          Call every scoreline. Climb the leaderboard. Show your mates you know
-          football.
+          Find official football tickets and sports travel packages with P1 Travel.
         </p>
 
         <p className="mt-2 text-xs font-black text-[#67e1f9]">
-          FREE to play →
+          Find Match Tickets →
         </p>
       </div>
     </a>

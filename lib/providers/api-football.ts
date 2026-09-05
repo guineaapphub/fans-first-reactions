@@ -271,7 +271,7 @@ async function buildFixtureSnapshot(): Promise<Fixture[]> {
  */
 const getCachedFixtureSnapshot = unstable_cache(
   async () => buildFixtureSnapshot(),
-  ["fans-first-reactions-fixture-snapshot-v4"],
+  ["fans-first-reactions-fixture-snapshot-v5"],
   {
     revalidate: CACHE_SECONDS,
   }
